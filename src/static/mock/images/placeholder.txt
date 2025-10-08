@@ -1,0 +1,14 @@
+This directory contains placeholder references for medical images.
+
+For actual deployment, replace these with real medical images:
+- skin_01.jpg (640x480px) - Skin allergy reaction photo 1
+- skin_02.jpg (640x480px) - Skin allergy reaction photo 2  
+- xray_chest_01.jpg (800x600px) - Chest X-ray image
+- blood_test_01.jpg (640x480px) - Blood test report scan
+- ecg_01.jpg (800x400px) - ECG chart image
+
+Image requirements:
+- Format: JPEG
+- Max size: 2MB per image
+- Recommended dimensions listed above
+- Use de-identified medical images only

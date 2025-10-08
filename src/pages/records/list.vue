@@ -4,14 +4,42 @@
 
     <view class="content">
       <view class="list-item" v-for="record in records" :key="record.id" @click="viewDetail(record.id)">
-        <view class="item-header">
-          <view class="item-title">{{ record.title }}</view>
-          <view class="item-date">{{ record.date }}</view>
+        <!-- 缩略图 -->
+        <view class="item-thumbnail" v-if="record.images && record.images.length > 0">
+          <image
+            :src="record.images[0]"
+            mode="aspectFill"
+            class="thumbnail-img"
+          />
+          <view class="image-count" v-if="record.images.length > 1">
+            {{ record.images.length }} 张
+          </view>
         </view>
-        <view class="item-summary">{{ record.summary_text }}</view>
-        <view class="item-tags">
-          <view v-for="tag in record.image_analysis.tags" :key="tag" class="tag">
-            {{ tag }}
+
+        <view class="item-content">
+          <view class="item-header">
+            <view class="item-title">{{ record.title }}</view>
+            <view class="item-date">{{ record.date }}</view>
+          </view>
+
+          <view class="item-summary">{{ record.summary_text }}</view>
+
+          <view class="item-tags">
+            <view v-for="tag in record.image_analysis.tags" :key="tag" class="tag">
+              {{ tag }}
+            </view>
+          </view>
+
+          <!-- 置信度指示器 -->
+          <view class="confidence-bar">
+            <view class="confidence-label">AI 置信度</view>
+            <view class="confidence-value">{{ (record.image_analysis.confidence * 100).toFixed(0) }}%</view>
+            <view class="confidence-progress">
+              <view
+                class="confidence-fill"
+                :style="{ width: (record.image_analysis.confidence * 100) + '%' }"
+              ></view>
+            </view>
           </view>
         </view>
       </view>
@@ -48,14 +76,42 @@ const viewDetail = (id) => {
 .list-item {
   background: white;
   border-radius: 20rpx;
-  padding: 30rpx;
+  padding: 0;
   margin-bottom: 20rpx;
   box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.08);
   transition: all 0.3s;
+  overflow: hidden;
 }
 
 .list-item:active {
   transform: scale(0.98);
+}
+
+.item-thumbnail {
+  width: 100%;
+  height: 300rpx;
+  position: relative;
+  background: #f0f0f0;
+}
+
+.thumbnail-img {
+  width: 100%;
+  height: 100%;
+}
+
+.image-count {
+  position: absolute;
+  bottom: 15rpx;
+  right: 15rpx;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 8rpx 16rpx;
+  border-radius: 20rpx;
+  font-size: 22rpx;
+}
+
+.item-content {
+  padding: 30rpx;
 }
 
 .item-header {
@@ -93,6 +149,7 @@ const viewDetail = (id) => {
   display: flex;
   flex-wrap: wrap;
   gap: 10rpx;
+  margin-bottom: 15rpx;
 }
 
 .tag {
@@ -101,5 +158,41 @@ const viewDetail = (id) => {
   font-size: 22rpx;
   padding: 8rpx 16rpx;
   border-radius: 8rpx;
+}
+
+.confidence-bar {
+  margin-top: 15rpx;
+  padding-top: 15rpx;
+  border-top: 1px solid #f0f0f0;
+}
+
+.confidence-label {
+  font-size: 22rpx;
+  color: #999;
+  display: inline-block;
+  margin-right: 10rpx;
+}
+
+.confidence-value {
+  font-size: 22rpx;
+  color: #667eea;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.confidence-progress {
+  width: 100%;
+  height: 8rpx;
+  background: #f0f0f0;
+  border-radius: 4rpx;
+  margin-top: 8rpx;
+  overflow: hidden;
+}
+
+.confidence-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  border-radius: 4rpx;
+  transition: width 0.3s;
 }
 </style>
