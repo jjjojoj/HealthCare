@@ -82,62 +82,105 @@ const navigateTo = (url) => {
 <style scoped>
 .page {
   min-height: 100vh;
-  background: #f5f5f5;
-  padding-bottom: 100rpx;
+  background: #f0f2f5;
+  padding-bottom: 120rpx;
 }
 
 .content {
-  padding: 20rpx;
+  padding: 24rpx;
 }
 
 .welcome-card {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 20rpx;
-  padding: 40rpx;
-  margin-bottom: 30rpx;
-  box-shadow: 0 8rpx 20rpx rgba(102, 126, 234, 0.3);
+  background: linear-gradient(135deg, #1890ff 0%, #0050b3 100%);
+  border-radius: 24rpx;
+  padding: 48rpx 40rpx;
+  margin-bottom: 32rpx;
+  box-shadow: 0 12rpx 32rpx rgba(24, 144, 255, 0.35);
+  position: relative;
+  overflow: hidden;
+}
+
+.welcome-card::before {
+  content: '';
+  position: absolute;
+  width: 300rpx;
+  height: 300rpx;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  top: -100rpx;
+  right: -100rpx;
 }
 
 .welcome-text {
-  font-size: 40rpx;
-  font-weight: bold;
+  font-size: 44rpx;
+  font-weight: 600;
   color: white;
-  margin-bottom: 10rpx;
+  margin-bottom: 12rpx;
+  position: relative;
+  z-index: 1;
 }
 
 .welcome-subtitle {
-  font-size: 26rpx;
-  color: rgba(255, 255, 255, 0.8);
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.9);
+  position: relative;
+  z-index: 1;
+  letter-spacing: 1rpx;
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20rpx;
+  gap: 24rpx;
 }
 
 .grid-item {
   background: white;
   border-radius: 20rpx;
-  padding: 40rpx 20rpx;
+  padding: 48rpx 24rpx;
   text-align: center;
-  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.08);
-  transition: all 0.3s;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.06);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  border: 2rpx solid transparent;
+}
+
+.grid-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #1890ff 0%, #0050b3 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .grid-item:active {
-  transform: scale(0.95);
-  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.12);
+  transform: translateY(-4rpx);
+  box-shadow: 0 8rpx 24rpx rgba(24, 144, 255, 0.2);
+  border-color: #40a9ff;
+}
+
+.grid-item:active::before {
+  opacity: 0.05;
 }
 
 .grid-icon {
-  font-size: 60rpx;
-  margin-bottom: 15rpx;
+  font-size: 72rpx;
+  margin-bottom: 16rpx;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 4rpx 8rpx rgba(0, 0, 0, 0.1));
 }
 
 .grid-text {
-  font-size: 28rpx;
-  color: #333;
+  font-size: 30rpx;
+  color: #262626;
   font-weight: 500;
+  position: relative;
+  z-index: 1;
 }
 </style>

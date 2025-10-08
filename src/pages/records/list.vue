@@ -103,16 +103,18 @@ const viewDetail = (id, isCustom) => {
 
 .list-item {
   background: white;
-  border-radius: 20rpx;
+  border-radius: 24rpx;
   padding: 0;
-  margin-bottom: 20rpx;
-  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.08);
-  transition: all 0.3s;
+  margin-bottom: 24rpx;
+  box-shadow: 0 6rpx 16rpx rgba(24, 144, 255, 0.12);
+  transition: all 0.3s ease;
   overflow: hidden;
+  border: 1px solid rgba(24, 144, 255, 0.08);
 }
 
 .list-item:active {
   transform: scale(0.98);
+  box-shadow: 0 4rpx 12rpx rgba(24, 144, 255, 0.18);
 }
 
 .item-thumbnail {
@@ -181,11 +183,13 @@ const viewDetail = (id, isCustom) => {
 }
 
 .tag {
-  background: #f0f2ff;
-  color: #667eea;
+  background: #e6f4ff;
+  color: #1890ff;
   font-size: 22rpx;
-  padding: 8rpx 16rpx;
-  border-radius: 8rpx;
+  padding: 10rpx 18rpx;
+  border-radius: 12rpx;
+  transition: all 0.3s;
+  box-shadow: 0 2rpx 8rpx rgba(24, 144, 255, 0.15);
 }
 
 .confidence-bar {
@@ -203,24 +207,25 @@ const viewDetail = (id, isCustom) => {
 
 .confidence-value {
   font-size: 22rpx;
-  color: #667eea;
+  color: #1890ff;
   font-weight: bold;
   display: inline-block;
 }
 
 .confidence-progress {
   width: 100%;
-  height: 8rpx;
-  background: #f0f0f0;
-  border-radius: 4rpx;
+  height: 10rpx;
+  background: #e6f4ff;
+  border-radius: 5rpx;
   margin-top: 8rpx;
   overflow: hidden;
 }
 
 .confidence-fill {
   height: 100%;
-  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(90deg, #1890ff 0%, #0050b3 100%);
   border-radius: 4rpx;
   transition: width 0.3s;
+  box-shadow: 0 0 8rpx rgba(24, 144, 255, 0.4);
 }
 </style>

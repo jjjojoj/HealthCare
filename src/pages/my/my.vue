@@ -98,29 +98,32 @@ const logout = () => {
 }
 
 .content {
-  padding: 20rpx;
+  padding: 24rpx;
 }
 
 .user-card {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 20rpx;
-  padding: 40rpx;
+  background: linear-gradient(135deg, #1890ff 0%, #0050b3 100%);
+  border-radius: 24rpx;
+  padding: 44rpx;
   display: flex;
   align-items: center;
-  margin-bottom: 20rpx;
-  box-shadow: 0 8rpx 20rpx rgba(102, 126, 234, 0.3);
+  margin-bottom: 24rpx;
+  box-shadow: 0 10rpx 24rpx rgba(24, 144, 255, 0.35);
+  transition: all 0.3s ease;
 }
 
 .user-avatar {
-  width: 120rpx;
-  height: 120rpx;
-  background: rgba(255, 255, 255, 0.3);
+  width: 128rpx;
+  height: 128rpx;
+  background: rgba(255, 255, 255, 0.25);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 60rpx;
-  margin-right: 30rpx;
+  font-size: 64rpx;
+  margin-right: 32rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.15);
+  border: 3rpx solid rgba(255, 255, 255, 0.4);
 }
 
 .user-info {
@@ -141,17 +144,20 @@ const logout = () => {
 
 .menu-list {
   background: white;
-  border-radius: 20rpx;
+  border-radius: 24rpx;
   overflow: hidden;
-  margin-bottom: 20rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 6rpx 16rpx rgba(24, 144, 255, 0.08);
+  border: 1px solid rgba(24, 144, 255, 0.06);
 }
 
 .menu-item {
   display: flex;
   align-items: center;
-  padding: 30rpx;
+  padding: 32rpx 30rpx;
   border-bottom: 1px solid #f0f0f0;
-  transition: background 0.3s;
+  transition: all 0.3s ease;
+  position: relative;
 }
 
 .menu-item:last-child {
@@ -159,7 +165,8 @@ const logout = () => {
 }
 
 .menu-item:active {
-  background: #f8f8f8;
+  background: linear-gradient(90deg, #e6f4ff 0%, transparent 100%);
+  transform: translateX(4rpx);
 }
 
 .menu-icon {
@@ -175,7 +182,13 @@ const logout = () => {
 
 .menu-arrow {
   font-size: 32rpx;
-  color: #ccc;
+  color: #bfbfbf;
+  transition: all 0.3s ease;
+}
+
+.menu-item:active .menu-arrow {
+  color: #1890ff;
+  transform: translateX(6rpx);
 }
 
 .logout-section {
@@ -184,12 +197,20 @@ const logout = () => {
 
 .logout-btn {
   width: 100%;
-  height: 90rpx;
+  height: 96rpx;
   background: white;
-  color: #f56c6c;
-  border: none;
-  border-radius: 20rpx;
+  color: #ff4d4f;
+  border: 2rpx solid #ffccc7;
+  border-radius: 24rpx;
   font-size: 32rpx;
   font-weight: bold;
+  box-shadow: 0 4rpx 12rpx rgba(255, 77, 79, 0.15);
+  transition: all 0.3s ease;
+}
+
+.logout-btn:active {
+  background: #fff1f0;
+  transform: scale(0.98);
+  box-shadow: 0 2rpx 8rpx rgba(255, 77, 79, 0.2);
 }
 </style>

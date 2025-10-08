@@ -62,16 +62,17 @@ const goBack = () => {
 
 <style scoped>
 .app-header {
-  height: 88rpx;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  height: 96rpx;
+  background: linear-gradient(135deg, #1890ff 0%, #0050b3 100%);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 30rpx;
+  padding: 0 32rpx;
   position: sticky;
   top: 0;
   z-index: 999;
-  box-shadow: 0 4rpx 12rpx rgba(102, 126, 234, 0.2);
+  box-shadow: 0 4rpx 16rpx rgba(24, 144, 255, 0.25);
+  backdrop-filter: blur(10rpx);
 }
 
 .header-left {
@@ -81,23 +82,31 @@ const goBack = () => {
 }
 
 .back-btn {
-  width: 60rpx;
-  height: 60rpx;
+  width: 64rpx;
+  height: 64rpx;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.25);
   border-radius: 50%;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8rpx);
+}
+
+.back-btn:active {
+  background: rgba(255, 255, 255, 0.35);
+  transform: scale(0.95);
 }
 
 .back-icon {
   color: white;
   font-size: 36rpx;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .app-logo {
-  font-size: 48rpx;
+  font-size: 52rpx;
+  filter: drop-shadow(0 2rpx 8rpx rgba(0, 0, 0, 0.15));
 }
 
 .header-center {
@@ -107,8 +116,10 @@ const goBack = () => {
 
 .app-name {
   color: white;
-  font-size: 34rpx;
-  font-weight: bold;
+  font-size: 36rpx;
+  font-weight: 600;
+  letter-spacing: 1rpx;
+  text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
 }
 
 .header-right {
@@ -119,14 +130,17 @@ const goBack = () => {
 }
 
 .user-info {
-  background: rgba(255, 255, 255, 0.2);
-  padding: 10rpx 20rpx;
-  border-radius: 30rpx;
+  background: rgba(255, 255, 255, 0.25);
+  padding: 12rpx 24rpx;
+  border-radius: 32rpx;
+  backdrop-filter: blur(8rpx);
+  border: 1rpx solid rgba(255, 255, 255, 0.3);
 }
 
 .user-name {
   color: white;
-  font-size: 24rpx;
+  font-size: 26rpx;
+  font-weight: 500;
   white-space: nowrap;
 }
 </style>

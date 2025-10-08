@@ -259,10 +259,11 @@ const viewPrescription = () => {
   width: 100%;
   height: 500rpx;
   background: #000;
-  border-radius: 20rpx;
+  border-radius: 24rpx;
   overflow: hidden;
-  margin-bottom: 20rpx;
+  margin-bottom: 24rpx;
   position: relative;
+  box-shadow: 0 8rpx 20rpx rgba(24, 144, 255, 0.15);
 }
 
 .swiper {
@@ -290,10 +291,12 @@ const viewPrescription = () => {
 /* 卡片样式 */
 .card {
   background: white;
-  border-radius: 20rpx;
-  padding: 30rpx;
-  margin-bottom: 20rpx;
-  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.08);
+  border-radius: 24rpx;
+  padding: 32rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 6rpx 16rpx rgba(24, 144, 255, 0.1);
+  border: 1px solid rgba(24, 144, 255, 0.06);
+  transition: all 0.3s ease;
 }
 
 .card-title {
@@ -351,8 +354,9 @@ const viewPrescription = () => {
 
 /* AI 分析卡片 */
 .analysis-card {
-  background: linear-gradient(135deg, #f8f9ff 0%, #fff 100%);
-  border: 2rpx solid #e8eaff;
+  background: linear-gradient(135deg, #e6f4ff 0%, #fff 100%);
+  border: 2rpx solid #bae0ff;
+  box-shadow: 0 6rpx 16rpx rgba(24, 144, 255, 0.15);
 }
 
 .analysis-section {
@@ -372,11 +376,13 @@ const viewPrescription = () => {
 }
 
 .analysis-tag {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #1890ff 0%, #0050b3 100%);
   color: white;
-  padding: 10rpx 20rpx;
-  border-radius: 20rpx;
+  padding: 12rpx 24rpx;
+  border-radius: 24rpx;
   font-size: 24rpx;
+  box-shadow: 0 4rpx 12rpx rgba(24, 144, 255, 0.25);
+  transition: all 0.3s ease;
 }
 
 .confidence-display {
@@ -388,65 +394,82 @@ const viewPrescription = () => {
 .confidence-percent {
   font-size: 40rpx;
   font-weight: bold;
-  color: #667eea;
+  color: #1890ff;
   min-width: 120rpx;
 }
 
 .confidence-bar-wrapper {
   flex: 1;
-  height: 16rpx;
-  background: #e8eaff;
-  border-radius: 8rpx;
+  height: 18rpx;
+  background: #e6f4ff;
+  border-radius: 9rpx;
   overflow: hidden;
+  box-shadow: inset 0 2rpx 4rpx rgba(24, 144, 255, 0.1);
 }
 
 .confidence-bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-  border-radius: 8rpx;
-  transition: width 0.3s;
+  background: linear-gradient(90deg, #1890ff 0%, #0050b3 100%);
+  border-radius: 9rpx;
+  transition: width 0.5s ease;
+  box-shadow: 0 0 12rpx rgba(24, 144, 255, 0.5);
 }
 
 .model-version {
   font-size: 26rpx;
-  color: #667eea;
+  color: #1890ff;
   font-family: monospace;
-  background: #f0f2ff;
-  padding: 10rpx 15rpx;
-  border-radius: 8rpx;
+  background: #e6f4ff;
+  padding: 12rpx 18rpx;
+  border-radius: 12rpx;
   display: inline-block;
+  border: 1px solid #bae0ff;
 }
 
 .analysis-notes {
   font-size: 26rpx;
   color: #666;
   line-height: 1.6;
-  background: #f8f9ff;
-  padding: 15rpx;
-  border-radius: 8rpx;
-  border-left: 4rpx solid #667eea;
+  background: #e6f4ff;
+  padding: 18rpx 20rpx;
+  border-radius: 12rpx;
+  border-left: 4rpx solid #1890ff;
 }
 
 /* 按钮 */
 .copy-btn {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #1890ff 0%, #0050b3 100%);
   color: white;
   border: none;
-  border-radius: 20rpx;
-  padding: 8rpx 20rpx;
+  border-radius: 24rpx;
+  padding: 10rpx 24rpx;
   font-size: 22rpx;
+  box-shadow: 0 4rpx 12rpx rgba(24, 144, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.copy-btn:active {
+  transform: scale(0.95);
+  box-shadow: 0 2rpx 8rpx rgba(24, 144, 255, 0.4);
 }
 
 .action-btn {
   width: 100%;
-  height: 80rpx;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  height: 88rpx;
+  background: linear-gradient(135deg, #1890ff 0%, #0050b3 100%);
   color: white;
   border: none;
-  border-radius: 12rpx;
+  border-radius: 16rpx;
   font-size: 30rpx;
   font-weight: bold;
   margin-top: 15rpx;
+  box-shadow: 0 6rpx 16rpx rgba(24, 144, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.action-btn:active {
+  transform: scale(0.98);
+  box-shadow: 0 4rpx 12rpx rgba(24, 144, 255, 0.4);
 }
 
 /* JSON 弹窗 */
@@ -500,6 +523,12 @@ const viewPrescription = () => {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.close-btn:active {
+  background: #e0e0e0;
+  transform: scale(0.95);
 }
 
 .json-body {
@@ -524,13 +553,20 @@ const viewPrescription = () => {
 
 .copy-btn-large {
   width: 100%;
-  height: 80rpx;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  height: 88rpx;
+  background: linear-gradient(135deg, #1890ff 0%, #0050b3 100%);
   color: white;
   border: none;
-  border-radius: 12rpx;
+  border-radius: 16rpx;
   font-size: 30rpx;
   font-weight: bold;
+  box-shadow: 0 6rpx 16rpx rgba(24, 144, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.copy-btn-large:active {
+  transform: scale(0.98);
+  box-shadow: 0 4rpx 12rpx rgba(24, 144, 255, 0.4);
 }
 
 /* 空状态 */

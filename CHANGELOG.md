@@ -194,6 +194,76 @@
   - ✅ 小程序开发环境配置问题
 - **时间**：2025-10-08
 
+### 2025-10-08 - 全面优化界面设计并更换蓝色主题
+- **任务**：优化全局界面视觉设计，将主题色从紫色系改为蓝色系
+- **重大修改**：
+  - **全局主题色更新**
+    - 主色调：#667eea → #1890ff（Ant Design 蓝）
+    - 深色调：#764ba2 → #0050b3
+    - 所有渐变背景统一为蓝色系
+    - 阴影颜色适配蓝色主题
+  - **全局样式增强**（src/static/index.css）
+    - 新增 CSS 变量系统（--primary-color, --primary-dark 等）
+    - 优化卡片阴影和圆角（16rpx 圆角，多层次阴影）
+    - 增强按钮交互效果（渐变背景、点击态动画）
+    - 改进输入框聚焦状态（蓝色边框、淡蓝背景）
+    - 统一字体系统（-apple-system 等）
+  - **登录页面优化**（src/pages/login/login.vue）
+    - 蓝色渐变背景 + 装饰性圆形元素
+    - 毛玻璃效果卡片（backdrop-filter）
+    - 浮动动画图标（@keyframes float）
+    - 增强输入框聚焦效果（蓝色光晕）
+    - 优化提示区域样式（淡蓝背景 + 虚线边框）
+  - **首页界面优化**（src/pages/home/home.vue）
+    - 欢迎卡片采用蓝色渐变 + 装饰圆形
+    - 网格卡片添加悬停渐变效果
+    - 图标添加阴影滤镜
+    - 点击态上移动画（translateY）
+  - **病历列表页优化**（src/pages/records/list.vue）
+    - 卡片圆角增大到 24rpx
+    - 蓝色主题阴影和边框
+    - 标签使用淡蓝背景（#e6f4ff）
+    - 置信度进度条蓝色渐变 + 发光效果
+  - **病历详情页优化**（src/pages/records/detail.vue）
+    - AI 分析卡片淡蓝渐变背景
+    - 分析标签蓝色渐变 + 白色文字
+    - 置信度显示增强（大号百分比 + 发光进度条）
+    - 模型版本和备注区域淡蓝配色
+    - 所有按钮统一蓝色渐变
+  - **AppHeader 组件优化**（src/components/AppHeader.vue）
+    - 蓝色渐变背景 + 毛玻璃效果
+    - 返回按钮毛玻璃背景 + 点击缩放
+    - 用户信息标签边框装饰
+    - 增强阴影效果
+  - **TabBar 配色更新**（src/pages.json）
+    - 选中色：#667eea → #1890ff
+    - 未选中色：#666666 → #8c8c8c
+    - 边框样式：black → white
+- **涉及文件**：
+  - `src/static/index.css` - 全局样式和主题变量
+  - `src/pages/login/login.vue` - 登录页面
+  - `src/pages/home/home.vue` - 首页
+  - `src/pages/records/list.vue` - 病历列表
+  - `src/pages/records/detail.vue` - 病历详情
+  - `src/pages/my/my.vue` - 我的页面
+  - `src/components/AppHeader.vue` - 全局头部
+  - `src/pages.json` - TabBar 配置
+- **设计亮点**：
+  - 🎨 统一的蓝色主题色系（Ant Design Blue）
+  - ✨ 毛玻璃效果（backdrop-filter）
+  - 🌟 多层次阴影系统
+  - 🎯 丰富的交互动画（悬停、点击、过渡）
+  - 📐 更大的圆角和间距（现代化设计）
+  - 🔆 发光效果和渐变背景
+  - 💫 浮动和平移动画
+  - 🎭 CSS 变量系统便于主题定制
+- **用户体验提升**：
+  - 视觉层次更清晰
+  - 交互反馈更明确
+  - 色彩对比更舒适
+  - 界面更加现代化
+- **时间**：2025-10-08
+
 ---
 
 ## 🔧 配置说明
