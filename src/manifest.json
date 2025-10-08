@@ -1,0 +1,29 @@
+{
+  "name": "healthcare-uniapp",
+  "appid": "__UNI__HEALTHCARE",
+  "description": "远程医疗/病历管理演示",
+  "versionName": "1.0.0",
+  "versionCode": "100",
+  "transformPx": false,
+  "app-plus": {
+    "usingComponents": true,
+    "nvueStyleCompiler": "uni-app",
+    "compilerVersion": 3,
+    "modules": {}
+  },
+  "quickapp": {},
+  "mp-weixin": {
+    "appid": "",
+    "setting": {
+      "urlCheck": false
+    },
+    "usingComponents": true
+  },
+  "h5": {
+    "title": "远程医疗管理",
+    "router": {
+      "mode": "hash",
+      "base": "./"
+    }
+  }
+}

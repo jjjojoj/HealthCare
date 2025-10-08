@@ -1,0 +1,40 @@
+{
+  "records": [
+    {
+      "id": 1,
+      "patientName": "张三",
+      "diagnosis": "感冒",
+      "doctor": "李医生",
+      "date": "2025-10-05",
+      "hospital": "人民医院",
+      "symptoms": "发热、咳嗽、流涕",
+      "treatment": "口服药物治疗，多休息",
+      "prescription": "感冒清热颗粒、阿莫西林",
+      "followUp": "一周后复诊"
+    },
+    {
+      "id": 2,
+      "patientName": "张三",
+      "diagnosis": "高血压",
+      "doctor": "王医生",
+      "date": "2025-09-20",
+      "hospital": "中心医院",
+      "symptoms": "头晕、头痛",
+      "treatment": "降压药物治疗，控制饮食",
+      "prescription": "缬沙坦胶囊",
+      "followUp": "每月复诊"
+    },
+    {
+      "id": 3,
+      "patientName": "张三",
+      "diagnosis": "胃炎",
+      "doctor": "赵医生",
+      "date": "2025-08-15",
+      "hospital": "人民医院",
+      "symptoms": "胃痛、反酸",
+      "treatment": "抑酸治疗，规律饮食",
+      "prescription": "奥美拉唑、铝碳酸镁",
+      "followUp": "两周后复诊"
+    }
+  ]
+}

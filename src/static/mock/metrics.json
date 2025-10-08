@@ -1,0 +1,29 @@
+{
+  "bloodPressure": [
+    { "date": "2025-10-01", "systolic": 135, "diastolic": 85 },
+    { "date": "2025-10-02", "systolic": 132, "diastolic": 83 },
+    { "date": "2025-10-03", "systolic": 128, "diastolic": 80 },
+    { "date": "2025-10-04", "systolic": 130, "diastolic": 82 },
+    { "date": "2025-10-05", "systolic": 125, "diastolic": 78 },
+    { "date": "2025-10-06", "systolic": 127, "diastolic": 79 },
+    { "date": "2025-10-07", "systolic": 124, "diastolic": 77 }
+  ],
+  "heartRate": [
+    { "date": "2025-10-01", "value": 75 },
+    { "date": "2025-10-02", "value": 72 },
+    { "date": "2025-10-03", "value": 70 },
+    { "date": "2025-10-04", "value": 73 },
+    { "date": "2025-10-05", "value": 71 },
+    { "date": "2025-10-06", "value": 69 },
+    { "date": "2025-10-07", "value": 68 }
+  ],
+  "bloodSugar": [
+    { "date": "2025-10-01", "value": 6.2 },
+    { "date": "2025-10-02", "value": 5.8 },
+    { "date": "2025-10-03", "value": 6.0 },
+    { "date": "2025-10-04", "value": 5.9 },
+    { "date": "2025-10-05", "value": 5.7 },
+    { "date": "2025-10-06", "value": 6.1 },
+    { "date": "2025-10-07", "value": 5.8 }
+  ]
+}

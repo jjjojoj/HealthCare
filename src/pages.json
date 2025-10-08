@@ -1,0 +1,76 @@
+{
+  "pages": [
+    {
+      "path": "pages/login/login",
+      "style": {
+        "navigationBarTitleText": "登录"
+      }
+    },
+    {
+      "path": "pages/home/home",
+      "style": {
+        "navigationBarTitleText": "远程医疗管理"
+      }
+    },
+    {
+      "path": "pages/records/list",
+      "style": {
+        "navigationBarTitleText": "病历列表"
+      }
+    },
+    {
+      "path": "pages/records/detail",
+      "style": {
+        "navigationBarTitleText": "病历详情"
+      }
+    },
+    {
+      "path": "pages/upload/upload",
+      "style": {
+        "navigationBarTitleText": "上传文件"
+      }
+    },
+    {
+      "path": "pages/chatbot/chat",
+      "style": {
+        "navigationBarTitleText": "智能咨询"
+      }
+    },
+    {
+      "path": "pages/trends/trends",
+      "style": {
+        "navigationBarTitleText": "健康趋势"
+      }
+    },
+    {
+      "path": "pages/meds/meds",
+      "style": {
+        "navigationBarTitleText": "用药助手"
+      }
+    },
+    {
+      "path": "pages/emergency/emergency",
+      "style": {
+        "navigationBarTitleText": "紧急联系人"
+      }
+    },
+    {
+      "path": "pages/prescription/prescription",
+      "style": {
+        "navigationBarTitleText": "电子处方"
+      }
+    },
+    {
+      "path": "pages/video/video",
+      "style": {
+        "navigationBarTitleText": "视频会诊"
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "远程医疗",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  }
+}

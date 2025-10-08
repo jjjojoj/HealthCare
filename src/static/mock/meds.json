@@ -1,0 +1,31 @@
+{
+  "medications": [
+    {
+      "id": 1,
+      "name": "感冒清热颗粒",
+      "dosage": "1袋/次",
+      "frequency": "3次/日",
+      "duration": "7天",
+      "instructions": "饭后温水冲服",
+      "startDate": "2025-10-05"
+    },
+    {
+      "id": 2,
+      "name": "阿莫西林",
+      "dosage": "2粒/次",
+      "frequency": "3次/日",
+      "duration": "7天",
+      "instructions": "饭后服用",
+      "startDate": "2025-10-05"
+    },
+    {
+      "id": 3,
+      "name": "缬沙坦胶囊",
+      "dosage": "1粒/次",
+      "frequency": "1次/日",
+      "duration": "长期",
+      "instructions": "早晨空腹服用",
+      "startDate": "2025-09-20"
+    }
+  ]
+}
