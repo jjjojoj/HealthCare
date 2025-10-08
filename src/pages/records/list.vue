@@ -50,15 +50,43 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import AppHeader from '@/components/AppHeader.vue'
 import BottomNav from '@/components/BottomNav.vue'
 import recordsData from '@/static/mock/records.json'
 
-const records = ref(recordsData.records)
+const records = ref([])
 
-const viewDetail = (id) => {
-  uni.navigateTo({ url: `/pages/records/detail?id=${id}` })
+onMounted(() => {
+  loadRecords()
+})
+
+// 加载病历列表（合并本地上传和 mock 数据）
+const loadRecords = () => {
+  let customRecords = []
+
+  // 读取本地上传的病历
+  try {
+    const storedRecords = uni.getStorageSync('customRecords')
+    if (storedRecords) {
+      customRecords = JSON.parse(storedRecords)
+    }
+  } catch (e) {
+    console.error('读取本地病历失败', e)
+  }
+
+  // 合并本地上传和 mock 数据（本地的排在前面）
+  records.value = [...customRecords, ...recordsData.records]
+}
+
+const viewDetail = (id, isCustom) => {
+  // 判断是否为用户上传的病历
+  const record = records.value.find(r => r.id === id)
+  const customFlag = record && record.isCustom ? '&custom=true' : ''
+
+  uni.navigateTo({
+    url: `/pages/records/detail?id=${id}${customFlag}`
+  })
 }
 </script>
 

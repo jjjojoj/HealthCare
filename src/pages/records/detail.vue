@@ -153,14 +153,32 @@ const analysisJSON = computed(() => {
 })
 
 onMounted(() => {
-  // 从 URL 获取病历 ID
+  // 从 URL 获取病历 ID 和自定义标记
   const pages = getCurrentPages()
   const currentPage = pages[pages.length - 1]
   const options = currentPage.options || currentPage.$route?.query || {}
 
   const id = parseInt(options.id)
+  const isCustom = options.custom === 'true'
+
   if (id) {
-    record.value = recordsData.records.find(r => r.id === id)
+    // 如果是自定义上传的病历，从 localStorage 读取
+    if (isCustom) {
+      try {
+        const storedRecords = uni.getStorageSync('customRecords')
+        if (storedRecords) {
+          const customRecords = JSON.parse(storedRecords)
+          record.value = customRecords.find(r => r.id === id)
+        }
+      } catch (e) {
+        console.error('读取本地病历失败', e)
+      }
+    }
+
+    // 如果未找到或不是自定义病历，从 mock 数据读取
+    if (!record.value) {
+      record.value = recordsData.records.find(r => r.id === id)
+    }
   }
 })
 
