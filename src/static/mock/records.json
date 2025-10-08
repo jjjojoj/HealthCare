@@ -2,39 +2,72 @@
   "records": [
     {
       "id": 1,
-      "patientName": "张三",
-      "diagnosis": "感冒",
-      "doctor": "李医生",
+      "patient_id": 1,
+      "title": "皮肤过敏反应检查",
       "date": "2025-10-05",
-      "hospital": "人民医院",
-      "symptoms": "发热、咳嗽、流涕",
-      "treatment": "口服药物治疗，多休息",
-      "prescription": "感冒清热颗粒、阿莫西林",
-      "followUp": "一周后复诊"
+      "images": [
+        "/static/mock/images/skin_01.jpg",
+        "/static/mock/images/skin_02.jpg"
+      ],
+      "summary_text": "患者手臂出现红色斑疹，伴有轻微瘙痒。经检查为接触性皮炎，建议使用抗过敏药物并避免接触过敏源。",
+      "image_analysis": {
+        "tags": ["皮疹", "红斑", "接触性皮炎"],
+        "model_version": "derma-vision-v2.3",
+        "confidence": 0.89,
+        "notes": "检测到典型的接触性皮炎特征，建议进一步过敏原测试"
+      },
+      "prescription_id": 1
     },
     {
       "id": 2,
-      "patientName": "张三",
-      "diagnosis": "高血压",
-      "doctor": "王医生",
-      "date": "2025-09-20",
-      "hospital": "中心医院",
-      "symptoms": "头晕、头痛",
-      "treatment": "降压药物治疗，控制饮食",
-      "prescription": "缬沙坦胶囊",
-      "followUp": "每月复诊"
+      "patient_id": 1,
+      "title": "X光胸部检查",
+      "date": "2025-09-28",
+      "images": [
+        "/static/mock/images/xray_chest_01.jpg"
+      ],
+      "summary_text": "胸部X光检查显示肺部清晰，心影大小正常，未见明显异常阴影。建议继续定期体检。",
+      "image_analysis": {
+        "tags": ["肺部清晰", "心影正常", "无异常"],
+        "model_version": "xray-ai-v3.1",
+        "confidence": 0.95,
+        "notes": "图像质量优良，未检测到肺结节、胸腔积液或其他异常征象"
+      },
+      "prescription_id": null
     },
     {
       "id": 3,
-      "patientName": "张三",
-      "diagnosis": "胃炎",
-      "doctor": "赵医生",
-      "date": "2025-08-15",
-      "hospital": "人民医院",
-      "symptoms": "胃痛、反酸",
-      "treatment": "抑酸治疗，规律饮食",
-      "prescription": "奥美拉唑、铝碳酸镁",
-      "followUp": "两周后复诊"
+      "patient_id": 1,
+      "title": "血液检查报告",
+      "date": "2025-09-15",
+      "images": [
+        "/static/mock/images/blood_test_01.jpg"
+      ],
+      "summary_text": "血常规检查显示白细胞计数略高（11.2×10⁹/L），提示可能存在轻微感染。血红蛋白、血小板等指标正常。",
+      "image_analysis": {
+        "tags": ["白细胞升高", "轻度感染", "其他指标正常"],
+        "model_version": "lab-ocr-v1.8",
+        "confidence": 0.92,
+        "notes": "OCR识别血液报告数值，白细胞计数超出正常范围（参考值4-10×10⁹/L）"
+      },
+      "prescription_id": 2
+    },
+    {
+      "id": 4,
+      "patient_id": 1,
+      "title": "心电图检查",
+      "date": "2025-08-20",
+      "images": [
+        "/static/mock/images/ecg_01.jpg"
+      ],
+      "summary_text": "静息心电图显示窦性心律，心率72次/分，各波形正常，未见心肌缺血或心律失常表现。",
+      "image_analysis": {
+        "tags": ["窦性心律", "心率正常", "无异常"],
+        "model_version": "ecg-analyzer-v2.0",
+        "confidence": 0.88,
+        "notes": "心电图波形分析正常，PR间期、QRS波群、QT间期均在正常范围内"
+      },
+      "prescription_id": null
     }
   ]
 }

@@ -2,30 +2,59 @@
   "medications": [
     {
       "id": 1,
-      "name": "感冒清热颗粒",
-      "dosage": "1袋/次",
-      "frequency": "3次/日",
-      "duration": "7天",
-      "instructions": "饭后温水冲服",
-      "startDate": "2025-10-05"
+      "name": "氯雷他定片",
+      "atc_code": "R06AX13",
+      "interactions": [3],
+      "notes": "抗组胺药，用于缓解过敏性鼻炎、荨麻疹等过敏症状。与酮康唑合用时需注意血药浓度升高风险。"
     },
     {
       "id": 2,
-      "name": "阿莫西林",
-      "dosage": "2粒/次",
-      "frequency": "3次/日",
-      "duration": "7天",
-      "instructions": "饭后服用",
-      "startDate": "2025-10-05"
+      "name": "阿莫西林胶囊",
+      "atc_code": "J01CA04",
+      "interactions": [5],
+      "notes": "β-内酰胺类抗生素，用于敏感菌引起的感染。与丙磺舒合用可能延长阿莫西林半衰期。"
     },
     {
       "id": 3,
-      "name": "缬沙坦胶囊",
-      "dosage": "1粒/次",
-      "frequency": "1次/日",
-      "duration": "长期",
-      "instructions": "早晨空腹服用",
-      "startDate": "2025-09-20"
+      "name": "酮康唑片",
+      "atc_code": "J02AB02",
+      "interactions": [1, 7],
+      "notes": "抗真菌药物，可抑制CYP3A4酶，与氯雷他定、辛伐他汀合用需谨慎监测。"
+    },
+    {
+      "id": 4,
+      "name": "布洛芬缓释胶囊",
+      "atc_code": "M01AE01",
+      "interactions": [8],
+      "notes": "非甾体抗炎药，用于解热镇痛。与华法林合用时需密切监测凝血功能。"
+    },
+    {
+      "id": 5,
+      "name": "丙磺舒片",
+      "atc_code": "M04AB01",
+      "interactions": [2],
+      "notes": "降尿酸药，可减少青霉素类药物的肾排泄，与阿莫西林合用需调整剂量。"
+    },
+    {
+      "id": 6,
+      "name": "奥美拉唑肠溶胶囊",
+      "atc_code": "A02BC01",
+      "interactions": [],
+      "notes": "质子泵抑制剂，用于抑制胃酸分泌，治疗消化性溃疡和胃食管反流病。"
+    },
+    {
+      "id": 7,
+      "name": "辛伐他汀片",
+      "atc_code": "C10AA01",
+      "interactions": [3],
+      "notes": "他汀类降脂药，与酮康唑等CYP3A4抑制剂合用可能增加肌病风险。"
+    },
+    {
+      "id": 8,
+      "name": "华法林钠片",
+      "atc_code": "B01AA03",
+      "interactions": [4],
+      "notes": "抗凝血药，与布洛芬等非甾体抗炎药合用可能增加出血风险，需定期监测INR。"
     }
   ]
 }

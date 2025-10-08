@@ -1,20 +1,29 @@
 <template>
-  <view class="container" style="display: flex; flex-direction: column; height: calc(100vh - 88rpx);">
-    <scroll-view scroll-y class="chat-content" :scroll-top="scrollTop" scroll-with-animation>
-      <view v-for="(msg, index) in messages" :key="index"
-            :class="msg.type === 'user' ? 'msg-user' : 'msg-bot'">
-        <view class="msg-bubble">{{ msg.content }}</view>
+  <view class="page">
+    <AppHeader title="智能咨询" />
+
+    <view class="chat-container">
+      <scroll-view scroll-y class="chat-content" :scroll-top="scrollTop" scroll-with-animation>
+        <view v-for="(msg, index) in messages" :key="index"
+              :class="msg.type === 'user' ? 'msg-user' : 'msg-bot'">
+          <view class="msg-bubble">{{ msg.content }}</view>
+        </view>
+      </scroll-view>
+
+      <view class="chat-input">
+        <input v-model="inputText" placeholder="输入您的问题..." @confirm="sendMessage" />
+        <button @click="sendMessage" size="mini" class="send-btn">发送</button>
       </view>
-    </scroll-view>
-    <view class="chat-input">
-      <input v-model="inputText" placeholder="输入您的问题..." @confirm="sendMessage" />
-      <button @click="sendMessage" size="mini">发送</button>
     </view>
+
+    <BottomNav />
   </view>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import AppHeader from '@/components/AppHeader.vue'
+import BottomNav from '@/components/BottomNav.vue'
 
 const messages = ref([
   { type: 'bot', content: '您好，我是智能医疗助手，请问有什么可以帮您？' }
@@ -45,6 +54,21 @@ const sendMessage = () => {
 </script>
 
 <style scoped>
+.page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f5f5f5;
+}
+
+.chat-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  margin-bottom: 100rpx;
+}
+
 .chat-content {
   flex: 1;
   padding: 20rpx;
@@ -65,19 +89,23 @@ const sendMessage = () => {
 
 .msg-bubble {
   max-width: 70%;
-  padding: 20rpx;
-  border-radius: 10rpx;
+  padding: 20rpx 25rpx;
+  border-radius: 16rpx;
   font-size: 28rpx;
+  line-height: 1.5;
 }
 
 .msg-user .msg-bubble {
-  background: #007aff;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
+  border-bottom-right-radius: 4rpx;
 }
 
 .msg-bot .msg-bubble {
   background: white;
   color: #333;
+  border-bottom-left-radius: 4rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.08);
 }
 
 .chat-input {
@@ -85,13 +113,27 @@ const sendMessage = () => {
   padding: 20rpx;
   background: white;
   border-top: 1px solid #eee;
+  align-items: center;
 }
 
 .chat-input input {
   flex: 1;
-  border: 1px solid #ddd;
-  border-radius: 8rpx;
-  padding: 10rpx 20rpx;
+  height: 70rpx;
+  border: 2rpx solid #e0e0e0;
+  border-radius: 35rpx;
+  padding: 0 30rpx;
+  font-size: 28rpx;
   margin-right: 20rpx;
+}
+
+.send-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  height: 70rpx;
+  line-height: 70rpx;
+  padding: 0 30rpx;
+  border-radius: 35rpx;
+  font-size: 28rpx;
 }
 </style>
