@@ -154,7 +154,8 @@ const analysisJSON = computed(() => {
 
 onMounted(() => {
   // 从 URL 获取病历 ID 和自定义标记
-  const pages = getCurrentPages()
+  const pages = typeof getCurrentPages === 'function' ? getCurrentPages() : []
+  if (pages.length === 0) return
   const currentPage = pages[pages.length - 1]
   const options = currentPage.options || currentPage.$route?.query || {}
 

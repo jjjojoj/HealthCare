@@ -43,10 +43,10 @@ const currentPath = ref('')
 
 onMounted(() => {
   // 获取当前页面路径
-  const pages = getCurrentPages()
+  const pages = typeof getCurrentPages === 'function' ? getCurrentPages() : []
   if (pages.length > 0) {
     const currentPage = pages[pages.length - 1]
-    currentPath.value = '/' + currentPage.route
+    currentPath.value = '/' + (currentPage.route || currentPage.__route__ || '')
   }
 })
 

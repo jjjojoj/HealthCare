@@ -21,7 +21,6 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { getCurrentPages } from '@dcloudio/uni-app'
 
 const props = defineProps({
   title: {
@@ -52,7 +51,7 @@ onMounted(() => {
 })
 
 const goBack = () => {
-  const pages = getCurrentPages()
+  const pages = typeof getCurrentPages === 'function' ? getCurrentPages() : []
   if (pages.length > 1) {
     uni.navigateBack()
   } else {
