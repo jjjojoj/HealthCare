@@ -1,0 +1,351 @@
+/* ============================================
+   高级设计系统 - Design System
+   ============================================ */
+
+/* 设计令牌 (Design Tokens) */
+:root {
+  /* 间距系统 - 8pt Grid */
+  --space-xs: 8rpx;
+  --space-sm: 12rpx;
+  --space-md: 16rpx;
+  --space-lg: 24rpx;
+  --space-xl: 32rpx;
+  --space-2xl: 48rpx;
+  --space-3xl: 64rpx;
+
+  /* 圆角系统 */
+  --radius-sm: 8rpx;
+  --radius-md: 12rpx;
+  --radius-lg: 16rpx;
+  --radius-xl: 20rpx;
+  --radius-2xl: 24rpx;
+  --radius-full: 9999rpx;
+
+  /* 阴影系统 - Elevation */
+  --shadow-xs: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 4rpx 16rpx rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 8rpx 24rpx rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 12rpx 32rpx rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20rpx 48rpx rgba(0, 0, 0, 0.12);
+  --shadow-colored: 0 8rpx 32rpx rgba(55, 205, 135, 0.15);
+
+  /* 颜色系统 */
+  --color-primary: #37CD87;
+  --color-primary-light: #5FD9A3;
+  --color-primary-lighter: #E8F9F2;
+  --color-primary-dark: #2DB873;
+  
+  --color-success: #67C23A;
+  --color-warning: #E6A23C;
+  --color-danger: #F56C6C;
+  --color-info: #909399;
+
+  /* 中性色 */
+  --color-text-primary: #2C3E50;
+  --color-text-secondary: #606266;
+  --color-text-tertiary: #909399;
+  --color-text-placeholder: #C0C4CC;
+  
+  --color-bg-primary: #FFFFFF;
+  --color-bg-secondary: #F8FAFC;
+  --color-bg-tertiary: #F1F4F9;
+  
+  --color-border: #E4E7ED;
+  --color-border-light: #EBEEF5;
+  
+  /* 渐变色 */
+  --gradient-primary: linear-gradient(135deg, #37CD87 0%, #2DB873 100%);
+  --gradient-green: linear-gradient(135deg, #37CD87 0%, #5FD9A3 100%);
+  --gradient-purple: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  --gradient-ocean: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --gradient-sunset: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+  
+  /* 玻璃态效果 */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.1);
+  
+  /* 字体系统 */
+  --font-xs: 24rpx;
+  --font-sm: 26rpx;
+  --font-md: 28rpx;
+  --font-lg: 32rpx;
+  --font-xl: 36rpx;
+  --font-2xl: 40rpx;
+  --font-3xl: 48rpx;
+  
+  /* 字重 */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  
+  /* 动画曲线 */
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
+  
+  /* 过渡时间 */
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 350ms;
+}
+
+/* ============================================
+   卡片组件 - Card System
+   ============================================ */
+
+.premium-card {
+  background: var(--color-bg-primary);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--duration-base) var(--ease-smooth);
+  overflow: hidden;
+  
+  &:active {
+    transform: translateY(-4rpx);
+    box-shadow: var(--shadow-md);
+  }
+}
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20rpx) saturate(180%);
+  -webkit-backdrop-filter: blur(20rpx) saturate(180%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--glass-shadow);
+}
+
+.gradient-card {
+  position: relative;
+  background: var(--gradient-green);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-colored);
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    animation: shimmer 3s infinite;
+  }
+}
+
+@keyframes shimmer {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(-10%, -10%) rotate(180deg); }
+}
+
+/* ============================================
+   按钮系统 - Button System
+   ============================================ */
+
+.btn-premium {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md) var(--space-xl);
+  border-radius: var(--radius-full);
+  font-size: var(--font-md);
+  font-weight: var(--weight-semibold);
+  transition: all var(--duration-base) var(--ease-smooth);
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width var(--duration-slow) var(--ease-smooth),
+                height var(--duration-slow) var(--ease-smooth);
+  }
+  
+  &:active::before {
+    width: 300rpx;
+    height: 300rpx;
+  }
+}
+
+.btn-primary {
+  background: var(--gradient-green);
+  color: white;
+  box-shadow: var(--shadow-colored);
+  
+  &:active {
+    transform: scale(0.96);
+    box-shadow: var(--shadow-sm);
+  }
+}
+
+/* ============================================
+   输入框系统 - Input System
+   ============================================ */
+
+.input-premium {
+  background: var(--color-bg-secondary);
+  border: 2rpx solid transparent;
+  border-radius: var(--radius-lg);
+  padding: var(--space-md) var(--space-lg);
+  font-size: var(--font-md);
+  transition: all var(--duration-base) var(--ease-smooth);
+  
+  &:focus {
+    background: var(--color-bg-primary);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 6rpx rgba(64, 158, 255, 0.1);
+  }
+}
+
+/* ============================================
+   徽章系统 - Badge System
+   ============================================ */
+
+.badge-premium {
+  display: inline-flex;
+  align-items: center;
+  padding: 6rpx 16rpx;
+  border-radius: var(--radius-full);
+  font-size: var(--font-xs);
+  font-weight: var(--weight-medium);
+  background: var(--color-primary-lighter);
+  color: var(--color-primary);
+}
+
+/* ============================================
+   分隔线系统 - Divider System
+   ============================================ */
+
+.divider-premium {
+  height: 1rpx;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    var(--color-border) 50%, 
+    transparent 100%);
+  margin: var(--space-lg) 0;
+}
+
+/* ============================================
+   头像系统 - Avatar System
+   ============================================ */
+
+.avatar-premium {
+  position: relative;
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    border: 2rpx solid rgba(255, 255, 255, 0.5);
+    pointer-events: none;
+  }
+}
+
+/* ============================================
+   工具类 - Utility Classes
+   ============================================ */
+
+.text-gradient {
+  background: var(--gradient-green);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hover-lift {
+  transition: transform var(--duration-base) var(--ease-smooth);
+  
+  &:active {
+    transform: translateY(-4rpx);
+  }
+}
+
+.fade-in {
+  animation: fadeIn var(--duration-slow) var(--ease-smooth);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pulse {
+  animation: pulse 2s var(--ease-smooth) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* ============================================
+   响应式栅格系统 - Grid System
+   ============================================ */
+
+.grid-premium {
+  display: grid;
+  gap: var(--space-lg);
+  
+  &.cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  &.cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  &.cols-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ============================================
+   加载动画 - Loading Animation
+   ============================================ */
+
+.skeleton-premium {
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-tertiary) 25%,
+    var(--color-bg-secondary) 50%,
+    var(--color-bg-tertiary) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+  border-radius: var(--radius-md);
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+

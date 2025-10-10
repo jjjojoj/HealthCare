@@ -1,0 +1,19 @@
+/**
+ * 平台特定的样式导入
+ * 根据编译平台自动选择合适的设计系统
+ */
+
+/* #ifdef H5 */
+@import './design-system.scss';
+/* #endif */
+
+/* #ifdef MP-WEIXIN */
+@import './design-system-mp.scss';
+/* #endif */
+
+/* #ifdef APP-PLUS */
+@import './design-system.scss';
+/* #endif */
+
+
+

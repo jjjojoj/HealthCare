@@ -351,7 +351,7 @@ const submitUpload = async () => {
 
 .progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(90deg, #37CD87 0%, #2DB873 100%);
   border-radius: 8rpx;
   transition: width 0.3s;
 }
@@ -359,7 +359,7 @@ const submitUpload = async () => {
 .progress-percent {
   text-align: center;
   font-size: 24rpx;
-  color: #667eea;
+  color: #37CD87;
   font-weight: bold;
 }
 
@@ -371,13 +371,13 @@ const submitUpload = async () => {
 .submit-btn {
   width: 100%;
   height: 90rpx;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #37CD87 0%, #2DB873 100%);
   color: white;
   border: none;
   border-radius: 12rpx;
   font-size: 32rpx;
   font-weight: bold;
-  box-shadow: 0 8rpx 20rpx rgba(102, 126, 234, 0.3);
+  box-shadow: 0 8rpx 20rpx rgba(55, 205, 135, 0.3);
 }
 
 .submit-btn.disabled {

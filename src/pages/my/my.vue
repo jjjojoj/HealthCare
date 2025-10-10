@@ -93,69 +93,93 @@ const logout = () => {
 <style scoped>
 .page {
   min-height: 100vh;
-  background: #f5f5f5;
+  background: #F8F9FA;
   padding-bottom: 100rpx;
 }
 
 .content {
-  padding: 24rpx;
+  padding: 20rpx 16rpx;
 }
 
 .user-card {
-  background: linear-gradient(135deg, #1890ff 0%, #0050b3 100%);
-  border-radius: 24rpx;
-  padding: 44rpx;
+  background: linear-gradient(135deg, #37CD87 0%, #2DB873 100%);
+  border-radius: 18rpx;
+  padding: 40rpx 32rpx;
   display: flex;
   align-items: center;
-  margin-bottom: 24rpx;
-  box-shadow: 0 10rpx 24rpx rgba(24, 144, 255, 0.35);
+  margin-bottom: 20rpx;
+  box-shadow: 0 8rpx 24rpx rgba(55, 205, 135, 0.28);
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.user-card::before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  right: -15%;
+  width: 180rpx;
+  height: 180rpx;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  /* #ifdef H5 */
+  filter: blur(35rpx);
+  /* #endif */
 }
 
 .user-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  background: rgba(255, 255, 255, 0.25);
+  width: 120rpx;
+  height: 120rpx;
+  background: rgba(255, 255, 255, 0.2);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 64rpx;
-  margin-right: 32rpx;
-  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.15);
-  border: 3rpx solid rgba(255, 255, 255, 0.4);
+  font-size: 60rpx;
+  margin-right: 28rpx;
+  box-shadow: 0 6rpx 16rpx rgba(0, 0, 0, 0.15);
+  border: 3rpx solid rgba(255, 255, 255, 0.5);
+  /* #ifdef H5 */
+  backdrop-filter: blur(12rpx);
+  /* #endif */
+  position: relative;
+  z-index: 1;
 }
 
 .user-info {
   flex: 1;
+  position: relative;
+  z-index: 1;
 }
 
 .user-name {
-  font-size: 36rpx;
-  font-weight: bold;
+  font-size: 34rpx;
+  font-weight: 700;
   color: white;
   margin-bottom: 10rpx;
+  text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
 }
 
 .user-phone {
-  font-size: 26rpx;
-  color: rgba(255, 255, 255, 0.8);
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
 }
 
 .menu-list {
   background: white;
-  border-radius: 24rpx;
+  border-radius: 14rpx;
   overflow: hidden;
-  margin-bottom: 24rpx;
-  box-shadow: 0 6rpx 16rpx rgba(24, 144, 255, 0.08);
-  border: 1px solid rgba(24, 144, 255, 0.06);
+  margin-bottom: 20rpx;
+  box-shadow: 0 6rpx 18rpx rgba(0, 0, 0, 0.05);
 }
 
 .menu-item {
   display: flex;
   align-items: center;
-  padding: 32rpx 30rpx;
-  border-bottom: 1px solid #f0f0f0;
+  padding: 28rpx 24rpx;
+  border-bottom: 1rpx solid #F0F0F0;
   transition: all 0.3s ease;
   position: relative;
 }
@@ -165,52 +189,55 @@ const logout = () => {
 }
 
 .menu-item:active {
-  background: linear-gradient(90deg, #e6f4ff 0%, transparent 100%);
-  transform: translateX(4rpx);
+  background: linear-gradient(90deg, rgba(55, 205, 135, 0.08) 0%, transparent 100%);
+  transform: translateX(6rpx);
 }
 
 .menu-icon {
-  font-size: 40rpx;
+  font-size: 38rpx;
   margin-right: 20rpx;
+  width: 44rpx;
+  text-align: center;
 }
 
 .menu-text {
   flex: 1;
-  font-size: 30rpx;
-  color: #333;
+  font-size: 28rpx;
+  color: #333333;
+  font-weight: 500;
 }
 
 .menu-arrow {
-  font-size: 32rpx;
-  color: #bfbfbf;
+  font-size: 28rpx;
+  color: #CCCCCC;
   transition: all 0.3s ease;
 }
 
 .menu-item:active .menu-arrow {
-  color: #1890ff;
-  transform: translateX(6rpx);
+  color: #37CD87;
+  transform: translateX(8rpx);
 }
 
 .logout-section {
-  padding: 20rpx 0;
+  padding: 16rpx 0;
 }
 
 .logout-btn {
   width: 100%;
-  height: 96rpx;
+  height: 88rpx;
   background: white;
-  color: #ff4d4f;
-  border: 2rpx solid #ffccc7;
-  border-radius: 24rpx;
-  font-size: 32rpx;
-  font-weight: bold;
-  box-shadow: 0 4rpx 12rpx rgba(255, 77, 79, 0.15);
+  color: #FF4D4F;
+  border: 2rpx solid #FFCCC7;
+  border-radius: 12rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  box-shadow: 0 4rpx 12rpx rgba(255, 77, 79, 0.12);
   transition: all 0.3s ease;
 }
 
 .logout-btn:active {
-  background: #fff1f0;
-  transform: scale(0.98);
-  box-shadow: 0 2rpx 8rpx rgba(255, 77, 79, 0.2);
+  background: #FFF1F0;
+  transform: translateY(2rpx);
+  box-shadow: 0 2rpx 8rpx rgba(255, 77, 79, 0.15);
 }
 </style>

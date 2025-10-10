@@ -171,7 +171,7 @@ const removeImage = (index) => {
   width: 100%;
   padding-bottom: 100%;
   background: #f8f9ff;
-  border: 2rpx dashed #667eea;
+  border: 2rpx dashed #37CD87;
   border-radius: 12rpx;
   display: flex;
   flex-direction: column;
@@ -185,7 +185,7 @@ const removeImage = (index) => {
   left: 50%;
   transform: translate(-50%, -60%);
   font-size: 60rpx;
-  color: #667eea;
+  color: #37CD87;
   line-height: 1;
 }
 
@@ -195,7 +195,7 @@ const removeImage = (index) => {
   left: 50%;
   transform: translate(-50%, 30%);
   font-size: 22rpx;
-  color: #667eea;
+  color: #37CD87;
 }
 
 .image-count {
@@ -210,7 +210,7 @@ const removeImage = (index) => {
   width: 100%;
   height: 400rpx;
   background: linear-gradient(135deg, #f8f9ff 0%, #fff 100%);
-  border: 2rpx dashed #667eea;
+  border: 2rpx dashed #37CD87;
   border-radius: 20rpx;
   display: flex;
   flex-direction: column;
@@ -231,7 +231,7 @@ const removeImage = (index) => {
 
 .upload-text {
   font-size: 32rpx;
-  color: #667eea;
+  color: #37CD87;
   font-weight: bold;
   margin-bottom: 10rpx;
 }

@@ -1,0 +1,149 @@
+/**
+ * 小程序兼容版设计系统
+ * 移除了小程序不支持的 CSS 特性：
+ * - backdrop-filter（毛玻璃效果）
+ * - 复杂渐变和阴影
+ * - 某些高级动画
+ */
+
+/* ==================== 设计令牌 ==================== */
+
+/* 间距系统 - 基于 8pt Grid */
+:root {
+  /* 间距 */
+  --space-xs: 8rpx;
+  --space-sm: 12rpx;
+  --space-md: 16rpx;
+  --space-lg: 24rpx;
+  --space-xl: 32rpx;
+  --space-2xl: 48rpx;
+  --space-3xl: 64rpx;
+
+  /* 字体大小 */
+  --font-xs: 20rpx;
+  --font-sm: 24rpx;
+  --font-md: 28rpx;
+  --font-lg: 32rpx;
+  --font-xl: 36rpx;
+  --font-2xl: 40rpx;
+  --font-3xl: 48rpx;
+
+  /* 字重 */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* 行高 */
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.8;
+
+  /* 圆角 */
+  --radius-sm: 8rpx;
+  --radius-md: 12rpx;
+  --radius-lg: 16rpx;
+  --radius-xl: 20rpx;
+  --radius-2xl: 24rpx;
+  --radius-full: 9999rpx;
+
+  /* 简化的阴影（小程序支持的基础版本） */
+  --shadow-xs: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 4rpx 12rpx rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 8rpx 16rpx rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 12rpx 24rpx rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 16rpx 32rpx rgba(0, 0, 0, 0.12);
+  --shadow-colored: 0 8rpx 20rpx rgba(55, 205, 135, 0.2);
+
+  /* 色彩系统 */
+  --color-primary: #37CD87;
+  --color-primary-light: rgba(55, 205, 135, 0.1);
+  --color-primary-dark: #2DB873;
+
+  --color-secondary: #13c2c2;
+  
+  --color-success: #52c41a;
+  --color-warning: #faad14;
+  --color-error: #ff4d4f;
+  --color-info: #37CD87;
+
+  /* 文字颜色 */
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #666666;
+  --color-text-tertiary: #999999;
+  --color-text-placeholder: #CCCCCC;
+
+  /* 背景颜色 */
+  --color-bg-primary: #FFFFFF;
+  --color-bg-secondary: #F5F5F5;
+  --color-bg-tertiary: #E8E8E8;
+
+  /* 边框颜色 */
+  --color-border-light: #F0F0F0;
+  --color-border-base: #D9D9D9;
+  --color-border-dark: #BFBFBF;
+
+  /* 简化的动画时长 */
+  --duration-fast: 200ms;
+  --duration-base: 300ms;
+  --duration-slow: 400ms;
+
+  /* 简化的动画曲线 */
+  --ease-in-out: ease-in-out;
+  --ease-smooth: ease;
+}
+
+/* ==================== 通用混合类 ==================== */
+
+/* 简化的卡片样式（移除毛玻璃） */
+.card-base {
+  background: var(--color-bg-primary);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-lg);
+}
+
+/* 简化的渐变背景 */
+.gradient-primary {
+  background: linear-gradient(135deg, #37CD87 0%, #2DB873 100%);
+}
+
+.gradient-ocean {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+/* 简化的文字样式 */
+.text-gradient {
+  color: var(--color-primary);
+  font-weight: var(--weight-bold);
+}
+
+/* 简化的按钮样式 */
+.btn-primary {
+  background: linear-gradient(135deg, #37CD87 0%, #2DB873 100%);
+  color: white;
+  border-radius: var(--radius-full);
+  padding: var(--space-md) var(--space-xl);
+  font-weight: var(--weight-semibold);
+  box-shadow: var(--shadow-colored);
+}
+
+/* Flexbox 辅助类 */
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+

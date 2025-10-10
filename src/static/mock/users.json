@@ -6,10 +6,26 @@
       "dob": "1990-01-01",
       "gender": "male",
       "phone": "13800138000",
+      "role": "patient",
       "emergency_contact": {
         "name": "李四",
         "relation": "配偶",
         "phone": "13900139000"
+      }
+    },
+    {
+      "id": 2,
+      "name": "李医生",
+      "dob": "1975-05-15",
+      "gender": "male",
+      "phone": "13700137000",
+      "role": "clinician",
+      "department": "心内科",
+      "title": "主任医师",
+      "emergency_contact": {
+        "name": "王护士",
+        "relation": "同事",
+        "phone": "13600136000"
       }
     }
   ]

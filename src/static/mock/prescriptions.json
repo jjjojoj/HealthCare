@@ -1,0 +1,90 @@
+{
+  "prescriptions": [
+    {
+      "id": 1,
+      "prescription_number": "RX-2025100500123",
+      "patient_id": 1,
+      "doctor_name": "李医生",
+      "doctor_title": "主治医师",
+      "doctor_department": "皮肤科",
+      "doctor_signature": "李医生",
+      "hospital_name": "市人民医院",
+      "date": "2025-10-05",
+      "diagnosis": "接触性皮炎",
+      "medications": [
+        {
+          "id": 1,
+          "name": "氯雷他定片",
+          "specification": "10mg/片",
+          "quantity": 14,
+          "unit": "片",
+          "dosage": "每次1片",
+          "frequency": "每日1次",
+          "duration": "14天",
+          "usage": "口服，饭后服用",
+          "notes": "抗过敏药物，用于缓解皮肤瘙痒"
+        },
+        {
+          "id": 6,
+          "name": "奥美拉唑肠溶胶囊",
+          "specification": "20mg/粒",
+          "quantity": 14,
+          "unit": "粒",
+          "dosage": "每次1粒",
+          "frequency": "每日1次",
+          "duration": "14天",
+          "usage": "口服，空腹服用",
+          "notes": "保护胃黏膜，减少药物刺激"
+        }
+      ],
+      "instructions": "按时服药，注意休息，避免接触过敏源。如症状加重请及时就诊。",
+      "follow_up": "一周后复诊",
+      "created_at": "2025-10-05T10:30:00Z",
+      "status": "active"
+    },
+    {
+      "id": 2,
+      "prescription_number": "RX-2025091500456",
+      "patient_id": 1,
+      "doctor_name": "王医生",
+      "doctor_title": "副主任医师",
+      "doctor_department": "内科",
+      "doctor_signature": "王医生",
+      "hospital_name": "市人民医院",
+      "date": "2025-09-15",
+      "diagnosis": "轻度感染",
+      "medications": [
+        {
+          "id": 2,
+          "name": "阿莫西林胶囊",
+          "specification": "0.25g/粒",
+          "quantity": 21,
+          "unit": "粒",
+          "dosage": "每次2粒",
+          "frequency": "每日3次",
+          "duration": "7天",
+          "usage": "口服，饭后服用",
+          "notes": "抗生素，用于治疗细菌感染"
+        },
+        {
+          "id": 4,
+          "name": "布洛芬缓释胶囊",
+          "specification": "0.3g/粒",
+          "quantity": 6,
+          "unit": "粒",
+          "dosage": "每次1粒",
+          "frequency": "每日2次",
+          "duration": "3天",
+          "usage": "口服，饭后服用",
+          "notes": "解热镇痛，缓解发热和疼痛症状"
+        }
+      ],
+      "instructions": "按时服药，多饮水，注意休息。服用抗生素期间避免饮酒。",
+      "follow_up": "3天后电话随访",
+      "created_at": "2025-09-15T14:20:00Z",
+      "status": "completed"
+    }
+  ]
+}
+
+

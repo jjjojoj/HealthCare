@@ -8,14 +8,25 @@
     "dev:h5": "uni",
     "build:h5": "uni build",
     "dev:mp-weixin": "uni -p mp-weixin",
-    "build:mp-weixin": "uni build -p mp-weixin"
+    "build:mp-weixin": "uni build -p mp-weixin",
+    "lint": "eslint --ext .js,.vue src",
+    "lint:fix": "eslint --ext .js,.vue src --fix",
+    "lint:style": "stylelint \"src/**/*.{vue,scss,css}\"",
+    "lint:style:fix": "stylelint \"src/**/*.{vue,scss,css}\" --fix",
+    "format": "prettier --write \"src/**/*.{js,vue,scss,css,json}\"",
+    "check": "npm run lint && npm run lint:style",
+    "fix": "npm run lint:fix && npm run lint:style:fix && npm run format"
   },
   "dependencies": {
     "@dcloudio/uni-app": "^3.0.0-alpha-4020420240722002",
     "@dcloudio/uni-app-plus": "^3.0.0-alpha-4020420240722002",
     "@dcloudio/uni-h5": "^3.0.0-alpha-4020420240722002",
     "@dcloudio/uni-mp-weixin": "^3.0.0-alpha-4020420240722002",
+    "@dcloudio/uni-ui": "^1.5.11",
+    "@vant/weapp": "^1.11.7",
     "echarts": "^5.4.3",
+    "echarts-for-weixin": "^1.0.2",
+    "jspdf": "^2.5.1",
     "vue": "^3.4.21"
   },
   "devDependencies": {
@@ -23,6 +34,17 @@
     "@dcloudio/uni-cli-shared": "^3.0.0-alpha-4020420240722002",
     "@dcloudio/uni-stacktracey": "^3.0.0-alpha-4020420240722002",
     "@dcloudio/vite-plugin-uni": "^3.0.0-alpha-4020420240722002",
+    "eslint": "^9.37.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "eslint-plugin-vue": "^10.5.0",
+    "prettier": "^3.6.2",
+    "sass": "^1.93.2",
+    "stylelint": "^16.0.0",
+    "stylelint-config-recommended-vue": "^1.5.0",
+    "stylelint-config-standard": "^36.0.0",
+    "stylelint-config-standard-scss": "^13.0.0",
+    "stylelint-order": "^6.0.4",
     "vite": "^5.2.8"
   }
 }

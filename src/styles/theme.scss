@@ -1,0 +1,187 @@
+/**
+ * 医疗助手 - 全局主题变量
+ * 主题：蓝色系、专业高级感、简洁易用
+ */
+
+/* ========== 主题色彩定义 ========== */
+$primary-color: #3A8BD4;              // 主色 - 医疗蓝
+$primary-dark: #2870B5;               // 深蓝
+$primary-light: #5BA4E0;              // 浅蓝
+$primary-lighter: #E8F4FC;            // 极浅蓝（背景用）
+
+/* 辅助颜色 */
+$success-color: #52C41A;              // 成功/健康 - 绿色
+$warning-color: #FAAD14;              // 警告 - 橙色
+$error-color: #FF4D4F;                // 错误/危险 - 红色
+$info-color: #1890FF;                 // 信息 - 蓝色
+
+/* 中性色 */
+$text-primary: #333333;               // 主文字色
+$text-secondary: #666666;             // 次要文字色
+$text-tertiary: #999999;              // 辅助文字色
+$text-disabled: #CCCCCC;              // 禁用文字色
+
+/* 背景色 */
+$bg-page: #F8F9FA;                    // 页面背景 - 极浅灰
+$bg-card: #FFFFFF;                    // 卡片背景 - 纯白
+$bg-hover: #F5F7FA;                   // 悬停背景
+$bg-disabled: #F0F0F0;                // 禁用背景
+
+/* 边框色 */
+$border-color: #E8E8E8;               // 边框颜色
+$border-light: #F0F0F0;               // 浅边框
+$border-dark: #D9D9D9;                // 深边框
+
+/* ========== 渐变色定义 ========== */
+$gradient-primary: linear-gradient(135deg, #3A8BD4 0%, #2870B5 100%);
+$gradient-primary-light: linear-gradient(135deg, #5BA4E0 0%, #3A8BD4 100%);
+$gradient-card-header: linear-gradient(135deg, #2870B5 0%, #1B5A91 100%);
+$gradient-success: linear-gradient(135deg, #52C41A 0%, #389E0D 100%);
+$gradient-warning: linear-gradient(135deg, #FAAD14 0%, #D48806 100%);
+
+/* ========== 阴影定义 ========== */
+$shadow-card: 0 6rpx 18rpx rgba(0, 0, 0, 0.05);
+$shadow-card-hover: 0 10rpx 28rpx rgba(0, 0, 0, 0.08);
+$shadow-button: 0 4rpx 12rpx rgba(58, 139, 212, 0.25);
+$shadow-button-hover: 0 6rpx 16rpx rgba(58, 139, 212, 0.35);
+$shadow-header: 0 4rpx 16rpx rgba(58, 139, 212, 0.2);
+
+/* ========== 圆角定义 ========== */
+$radius-sm: 8rpx;                     // 小圆角 - 按钮
+$radius-md: 12rpx;                    // 中圆角 - 卡片
+$radius-lg: 20rpx;                    // 大圆角 - 主要卡片
+$radius-xl: 24rpx;                    // 超大圆角 - 特殊卡片
+$radius-round: 50%;                   // 圆形
+
+/* ========== 间距定义 ========== */
+$spacing-xs: 8rpx;
+$spacing-sm: 12rpx;
+$spacing-md: 16rpx;
+$spacing-lg: 24rpx;
+$spacing-xl: 32rpx;
+$spacing-xxl: 48rpx;
+
+/* ========== 字体定义 ========== */
+$font-size-xs: 22rpx;
+$font-size-sm: 24rpx;
+$font-size-base: 28rpx;
+$font-size-md: 30rpx;
+$font-size-lg: 32rpx;
+$font-size-xl: 36rpx;
+$font-size-xxl: 40rpx;
+$font-size-huge: 48rpx;
+
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+/* ========== 动画定义 ========== */
+$transition-fast: all 0.2s ease;
+$transition-normal: all 0.3s ease;
+$transition-slow: all 0.5s ease;
+
+/* ========== Z-index 层级 ========== */
+$z-index-header: 999;
+$z-index-nav: 999;
+$z-index-modal: 1000;
+$z-index-toast: 2000;
+
+/* ========== 混合宏 (Mixins) ========== */
+
+// 卡片样式
+@mixin card-base {
+  background: $bg-card;
+  border-radius: $radius-md;
+  box-shadow: $shadow-card;
+  transition: $transition-normal;
+}
+
+// 卡片悬停效果
+@mixin card-hover {
+  &:active {
+    transform: translateY(-2rpx);
+    box-shadow: $shadow-card-hover;
+  }
+}
+
+// 主按钮样式
+@mixin button-primary {
+  background: $gradient-primary;
+  color: white;
+  border: none;
+  border-radius: $radius-sm;
+  font-weight: $font-weight-semibold;
+  box-shadow: $shadow-button;
+  transition: $transition-normal;
+  
+  &:active {
+    transform: translateY(2rpx);
+    box-shadow: $shadow-button-hover;
+  }
+}
+
+// 次要按钮样式
+@mixin button-secondary {
+  background: white;
+  color: $primary-color;
+  border: 2rpx solid $primary-color;
+  border-radius: $radius-sm;
+  font-weight: $font-weight-medium;
+  transition: $transition-normal;
+  
+  &:active {
+    background: $primary-lighter;
+  }
+}
+
+// 文字省略
+@mixin text-ellipsis($lines: 1) {
+  @if $lines == 1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  } @else {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $lines;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+// Flex 居中
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Flex 两端对齐
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// 毛玻璃效果
+@mixin glass-effect {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10rpx);
+  border: 1rpx solid rgba(255, 255, 255, 0.3);
+}
+
+/* ========== 工具类 ========== */
+
+// 导出 CSS 变量供 Vue 使用
+:export {
+  primaryColor: $primary-color;
+  primaryDark: $primary-dark;
+  primaryLight: $primary-light;
+  successColor: $success-color;
+  warningColor: $warning-color;
+  errorColor: $error-color;
+}
+
+
+

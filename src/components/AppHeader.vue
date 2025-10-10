@@ -4,7 +4,7 @@
       <view v-if="showBack" class="back-btn" @click="goBack">
         <text class="back-icon">←</text>
       </view>
-      <view v-else class="app-logo">🏥</view>
+      <view v-else class="app-logo">✚</view>
     </view>
 
     <view class="header-center">
@@ -63,16 +63,25 @@ const goBack = () => {
 <style scoped>
 .app-header {
   height: 96rpx;
-  background: linear-gradient(135deg, #1890ff 0%, #0050b3 100%);
+  background: linear-gradient(135deg, #37CD87 0%, #2DB873 100%);
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 32rpx;
+  /* #ifdef H5 */
   position: sticky;
+  /* #endif */
+  /* #ifndef H5 */
+  position: fixed;
+  left: 0;
+  right: 0;
+  /* #endif */
   top: 0;
   z-index: 999;
-  box-shadow: 0 4rpx 16rpx rgba(24, 144, 255, 0.25);
+  box-shadow: 0 4rpx 16rpx rgba(55, 205, 135, 0.2);
+  /* #ifdef H5 */
   backdrop-filter: blur(10rpx);
+  /* #endif */
 }
 
 .header-left {
@@ -90,7 +99,9 @@ const goBack = () => {
   background: rgba(255, 255, 255, 0.25);
   border-radius: 50%;
   transition: all 0.3s ease;
+  /* #ifdef H5 */
   backdrop-filter: blur(8rpx);
+  /* #endif */
 }
 
 .back-btn:active {
@@ -106,7 +117,9 @@ const goBack = () => {
 
 .app-logo {
   font-size: 52rpx;
+  /* #ifdef H5 */
   filter: drop-shadow(0 2rpx 8rpx rgba(0, 0, 0, 0.15));
+  /* #endif */
 }
 
 .header-center {
@@ -133,7 +146,9 @@ const goBack = () => {
   background: rgba(255, 255, 255, 0.25);
   padding: 12rpx 24rpx;
   border-radius: 32rpx;
+  /* #ifdef H5 */
   backdrop-filter: blur(8rpx);
+  /* #endif */
   border: 1rpx solid rgba(255, 255, 255, 0.3);
 }
 

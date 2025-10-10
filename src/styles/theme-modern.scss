@@ -1,0 +1,389 @@
+/**
+ * 医疗助手 - 现代化全局主题 2025
+ * 设计理念:渐变色系、数据可视化、AI驱动
+ */
+
+/* ========== 现代主题色彩 ========== */
+$primary-color: #4A90E2;              // 主色 - 现代蓝
+$primary-dark: #357ABD;               // 深蓝
+$primary-light: #6BA3E8;              // 浅蓝
+$primary-lighter: #E3F2FD;            // 极浅蓝(背景用)
+
+// 医疗专用渐变色
+$health-green: #4ECDC4;               // 健康青绿
+$health-blue: #44A8F2;                // 健康蓝
+$health-purple: #8B7FD6;              // 健康紫
+$health-pink: #F48FB1;                // 健康粉
+
+/* 辅助颜色 - 柔和现代版 */
+$success-color: #5FD068;              // 成功/健康 - 清新绿
+$warning-color: #FFB84D;              // 警告 - 柔和橙
+$error-color: #FF6B6B;                // 错误/危险 - 柔和红
+$info-color: #4FC3F7;                 // 信息 - 明亮蓝
+
+/* 中性色 */
+$text-primary: #2C3E50;               // 主文字色 - 深灰蓝
+$text-secondary: #7F8C8D;             // 次要文字色
+$text-tertiary: #BDC3C7;              // 辅助文字色
+$text-disabled: #ECF0F1;              // 禁用文字色
+$text-white: #FFFFFF;                 // 白色文字
+
+/* 背景色 */
+$bg-page: #F5F7FA;                    // 页面背景 - 极浅灰蓝
+$bg-gradient: linear-gradient(180deg, #F0F4F8 0%, #FAFBFC 100%);
+$bg-card: #FFFFFF;                    // 卡片背景 - 纯白
+$bg-hover: #F8FAFC;                   // 悬停背景
+$bg-disabled: #ECEFF1;                // 禁用背景
+
+/* 边框色 */
+$border-color: #E1E8ED;               // 边框颜色
+$border-light: #F0F3F7;               // 浅边框
+$border-dark: #CBD5E0;                // 深边框
+
+/* ========== 现代渐变色定义 ========== */
+// 主要渐变
+$gradient-primary: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+$gradient-primary-soft: linear-gradient(135deg, #6BA3E8 0%, #4A90E2 100%);
+
+// 健康主题渐变
+$gradient-health: linear-gradient(135deg, #4ECDC4 0%, #44A8F2 100%);
+$gradient-health-warm: linear-gradient(135deg, #5FD068 0%, #4ECDC4 100%);
+$gradient-health-cool: linear-gradient(135deg, #44A8F2 0%, #8B7FD6 100%);
+
+// 功能性渐变
+$gradient-success: linear-gradient(135deg, #5FD068 0%, #3EBD5B 100%);
+$gradient-warning: linear-gradient(135deg, #FFB84D 0%, #FF9F1A 100%);
+$gradient-error: linear-gradient(135deg, #FF6B6B 0%, #EE5A52 100%);
+$gradient-info: linear-gradient(135deg, #4FC3F7 0%, #29B6F6 100%);
+
+// 卡片渐变
+$gradient-card-header: linear-gradient(135deg, rgba(74, 144, 226, 0.1) 0%, rgba(78, 205, 196, 0.1) 100%);
+$gradient-card-premium: linear-gradient(135deg, #8B7FD6 0%, #B794F6 100%);
+
+// 毛玻璃效果渐变
+$gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
+
+/* ========== 现代阴影定义 ========== */
+$shadow-xs: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
+$shadow-sm: 0 4rpx 12rpx rgba(0, 0, 0, 0.06);
+$shadow-md: 0 6rpx 20rpx rgba(0, 0, 0, 0.08);
+$shadow-lg: 0 10rpx 30rpx rgba(0, 0, 0, 0.10);
+$shadow-xl: 0 20rpx 40rpx rgba(0, 0, 0, 0.12);
+
+// 彩色阴影
+$shadow-primary: 0 8rpx 24rpx rgba(74, 144, 226, 0.25);
+$shadow-success: 0 8rpx 24rpx rgba(95, 208, 104, 0.25);
+$shadow-warning: 0 8rpx 24rpx rgba(255, 184, 77, 0.25);
+$shadow-health: 0 8rpx 24rpx rgba(78, 205, 196, 0.20);
+
+// 内阴影
+$shadow-inset: inset 0 2rpx 4rpx rgba(0, 0, 0, 0.06);
+
+/* ========== 圆角定义 ========== */
+$radius-xs: 6rpx;                     // 超小圆角
+$radius-sm: 10rpx;                    // 小圆角 - 按钮
+$radius-md: 16rpx;                    // 中圆角 - 卡片
+$radius-lg: 24rpx;                    // 大圆角 - 主要卡片
+$radius-xl: 32rpx;                    // 超大圆角 - 特殊卡片
+$radius-round: 9999rpx;               // 圆角按钮
+$radius-circle: 50%;                  // 圆形
+
+/* ========== 间距定义 ========== */
+$spacing-xs: 8rpx;
+$spacing-sm: 12rpx;
+$spacing-md: 16rpx;
+$spacing-lg: 24rpx;
+$spacing-xl: 32rpx;
+$spacing-xxl: 48rpx;
+$spacing-huge: 64rpx;
+
+/* ========== 字体定义 ========== */
+$font-size-xs: 20rpx;
+$font-size-sm: 24rpx;
+$font-size-base: 28rpx;
+$font-size-md: 30rpx;
+$font-size-lg: 32rpx;
+$font-size-xl: 36rpx;
+$font-size-xxl: 42rpx;
+$font-size-huge: 48rpx;
+$font-size-display: 56rpx;
+
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-extrabold: 800;
+
+$line-height-tight: 1.2;
+$line-height-normal: 1.5;
+$line-height-relaxed: 1.75;
+
+/* ========== 动画定义 ========== */
+$transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+$transition-normal: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+$transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+$ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+$ease-out: cubic-bezier(0.0, 0, 0.2, 1);
+$ease-in: cubic-bezier(0.4, 0, 1, 1);
+$ease-spring: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+/* ========== Z-index 层级 ========== */
+$z-index-header: 999;
+$z-index-nav: 999;
+$z-index-modal: 1000;
+$z-index-toast: 2000;
+$z-index-dropdown: 1001;
+
+/* ========== 现代化混合宏 (Mixins) ========== */
+
+// 现代卡片样式
+@mixin card-modern {
+  background: $bg-card;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-sm;
+  border: 1rpx solid $border-light;
+  transition: $transition-normal;
+  overflow: hidden;
+}
+
+// 卡片悬停效果
+@mixin card-hover {
+  &:active {
+    transform: translateY(-4rpx);
+    box-shadow: $shadow-lg;
+  }
+}
+
+// 毛玻璃卡片
+@mixin card-glass {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20rpx) saturate(180%);
+  border: 1rpx solid rgba(255, 255, 255, 0.5);
+  box-shadow: $shadow-md;
+}
+
+// 渐变卡片
+@mixin card-gradient($gradient) {
+  background: $gradient;
+  border: none;
+  box-shadow: $shadow-md;
+}
+
+// 现代主按钮
+@mixin button-primary {
+  background: $gradient-primary;
+  color: white;
+  border: none;
+  border-radius: $radius-sm;
+  font-weight: $font-weight-semibold;
+  box-shadow: $shadow-primary;
+  transition: $transition-normal;
+
+  &:active {
+    transform: translateY(2rpx) scale(0.98);
+    box-shadow: $shadow-sm;
+  }
+}
+
+// 健康主题按钮
+@mixin button-health {
+  background: $gradient-health;
+  color: white;
+  border: none;
+  border-radius: $radius-sm;
+  font-weight: $font-weight-semibold;
+  box-shadow: $shadow-health;
+  transition: $transition-normal;
+
+  &:active {
+    transform: translateY(2rpx) scale(0.98);
+  }
+}
+
+// 次要按钮
+@mixin button-secondary {
+  background: white;
+  color: $primary-color;
+  border: 2rpx solid $primary-color;
+  border-radius: $radius-sm;
+  font-weight: $font-weight-medium;
+  transition: $transition-normal;
+  box-shadow: $shadow-xs;
+
+  &:active {
+    background: $primary-lighter;
+    transform: scale(0.98);
+  }
+}
+
+// 幽灵按钮
+@mixin button-ghost {
+  background: transparent;
+  color: $primary-color;
+  border: 2rpx solid $border-color;
+  border-radius: $radius-sm;
+  font-weight: $font-weight-medium;
+  transition: $transition-normal;
+
+  &:active {
+    background: $bg-hover;
+    border-color: $primary-color;
+  }
+}
+
+// 文字省略
+@mixin text-ellipsis($lines: 1) {
+  @if $lines == 1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  } @else {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $lines;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+// Flex 居中
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Flex 两端对齐
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// 毛玻璃效果
+@mixin glass-effect($opacity: 0.95) {
+  background: rgba(255, 255, 255, $opacity);
+  backdrop-filter: blur(20rpx) saturate(180%);
+  border: 1rpx solid rgba(255, 255, 255, 0.5);
+}
+
+// 暗色毛玻璃效果
+@mixin glass-effect-dark($opacity: 0.7) {
+  background: rgba(0, 0, 0, $opacity);
+  backdrop-filter: blur(20rpx) saturate(180%);
+  border: 1rpx solid rgba(255, 255, 255, 0.1);
+}
+
+// 发光效果
+@mixin glow($color) {
+  box-shadow: 0 0 20rpx rgba($color, 0.5);
+}
+
+// 脉冲动画
+@mixin pulse-animation {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+// 渐入动画
+@mixin fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// 徽章样式
+@mixin badge($bg-color) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rpx 12rpx;
+  border-radius: $radius-round;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  background: $bg-color;
+  color: white;
+}
+
+// 数据卡片(仪表盘专用)
+@mixin metric-card {
+  @include card-modern;
+  padding: $spacing-lg;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: $transition-normal;
+
+  &:active {
+    transform: translateY(-4rpx) scale(1.02);
+    box-shadow: $shadow-lg;
+  }
+}
+
+// 带图标的列表项
+@mixin list-item-with-icon {
+  display: flex;
+  align-items: center;
+  padding: $spacing-md;
+  background: $bg-card;
+  border-radius: $radius-md;
+  transition: $transition-normal;
+
+  &:active {
+    background: $bg-hover;
+    transform: translateX(4rpx);
+  }
+}
+
+// 标签组样式
+@mixin tag-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-xs;
+}
+
+@mixin tag($color) {
+  padding: 6rpx 14rpx;
+  border-radius: $radius-round;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  background: $color;
+  color: white;
+  white-space: nowrap;
+}
+
+/* ========== 工具类 ========== */
+
+// 导出 CSS 变量供 Vue 使用
+:export {
+  primaryColor: $primary-color;
+  primaryDark: $primary-dark;
+  primaryLight: $primary-light;
+  healthGreen: $health-green;
+  healthBlue: $health-blue;
+  healthPurple: $health-purple;
+  successColor: $success-color;
+  warningColor: $warning-color;
+  errorColor: $error-color;
+  infoColor: $info-color;
+}
