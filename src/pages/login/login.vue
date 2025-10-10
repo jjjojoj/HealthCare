@@ -43,38 +43,40 @@
 
 <script setup>
 import { ref } from 'vue'
-import usersData from '@/static/mock/users.json'
+import { useAuth } from '@/composables/useAuth'
+
+const { login: authLogin } = useAuth()
 
 const username = ref('demo')
 const password = ref('demo')
 const loading = ref(false)
 
-const login = () => {
+const login = async () => {
   if (!username.value || !password.value) {
     uni.showToast({ title: '请输入用户名和密码', icon: 'none' })
     return
   }
 
-  // 验证用户名密码（写死 demo/demo）
-  if (username.value === 'demo' && password.value === 'demo') {
-    loading.value = true
+  loading.value = true
 
-    // 从 users.json 读取第一个用户信息
-    const userInfo = usersData.users[0]
+  try {
+    const result = await authLogin(username.value, password.value)
 
-    // 保存用户信息到本地存储
-    uni.setStorageSync('userInfo', userInfo)
-    uni.setStorageSync('isLogin', true)
+    if (result.success) {
+      uni.showToast({ title: '登录成功', icon: 'success' })
 
-    uni.showToast({ title: '登录成功', icon: 'success' })
-
-    setTimeout(() => {
+      setTimeout(() => {
+        loading.value = false
+        // 使用 switchTab 跳转到首页（因为首页在 tabBar 中）
+        uni.switchTab({ url: '/pages/home/home' })
+      }, 1000)
+    } else {
       loading.value = false
-      // 使用 switchTab 跳转到首页（因为首页在 tabBar 中）
-      uni.switchTab({ url: '/pages/home/home' })
-    }, 1000)
-  } else {
-    uni.showToast({ title: '用户名或密码错误', icon: 'none' })
+      uni.showToast({ title: result.message || '用户名或密码错误', icon: 'none' })
+    }
+  } catch (error) {
+    loading.value = false
+    uni.showToast({ title: '登录失败，请重试', icon: 'none' })
   }
 }
 </script>
@@ -82,7 +84,7 @@ const login = () => {
 <style scoped>
 .login-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #1890ff 0%, #0050b3 100%);
+  background: linear-gradient(135deg, #37CD87 0%, #2DB873 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -117,7 +119,9 @@ const login = () => {
   width: 100%;
   max-width: 600rpx;
   background: rgba(255, 255, 255, 0.98);
+  /* #ifdef H5 */
   backdrop-filter: blur(20rpx);
+  /* #endif */
   border-radius: 24rpx;
   padding: 64rpx 48rpx;
   box-shadow: 0 24rpx 80rpx rgba(0, 80, 179, 0.35);
@@ -177,7 +181,7 @@ const login = () => {
   content: '';
   width: 6rpx;
   height: 6rpx;
-  background: #1890ff;
+  background: #37CD87;
   border-radius: 50%;
   margin-right: 8rpx;
 }
@@ -195,15 +199,15 @@ const login = () => {
 }
 
 .input:focus {
-  border-color: #1890ff;
+  border-color: #37CD87;
   background: #f0f7ff;
-  box-shadow: 0 0 0 4rpx rgba(24, 144, 255, 0.1);
+  box-shadow: 0 0 0 4rpx rgba(55, 205, 135, 0.1);
 }
 
 .login-btn {
   width: 100%;
   height: 96rpx;
-  background: linear-gradient(135deg, #1890ff 0%, #0050b3 100%);
+  background: linear-gradient(135deg, #37CD87 0%, #2DB873 100%);
   color: white;
   border: none;
   border-radius: 16rpx;
@@ -213,13 +217,13 @@ const login = () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8rpx 24rpx rgba(24, 144, 255, 0.4);
+  box-shadow: 0 8rpx 24rpx rgba(55, 205, 135, 0.4);
   transition: all 0.3s ease;
 }
 
 .login-btn:active {
   transform: translateY(2rpx);
-  box-shadow: 0 4rpx 16rpx rgba(24, 144, 255, 0.3);
+  box-shadow: 0 4rpx 16rpx rgba(55, 205, 135, 0.3);
 }
 
 .login-btn[disabled] {
