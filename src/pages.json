@@ -1,6 +1,20 @@
 {
   "pages": [
     {
+      "path": "pages/splash/splash",
+      "style": {
+        "navigationBarTitleText": "",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/onboarding/onboarding",
+      "style": {
+        "navigationBarTitleText": "",
+        "navigationStyle": "custom"
+      }
+    },
+    {
       "path": "pages/login/login",
       "style": {
         "navigationBarTitleText": "登录",
@@ -83,11 +97,95 @@
         "navigationBarTitleText": "视频会诊",
         "navigationStyle": "custom"
       }
+    },
+    {
+      "path": "pages/health-profile/health-profile",
+      "style": {
+        "navigationBarTitleText": "健康档案",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/bmi/bmi",
+      "style": {
+        "navigationBarTitleText": "BMI评估",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/notification/notification",
+      "style": {
+        "navigationBarTitleText": "消息中心",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/settings/settings",
+      "style": {
+        "navigationBarTitleText": "设置",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/appointment/index",
+      "style": {
+        "navigationBarTitleText": "预约挂号",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/appointment/doctors",
+      "style": {
+        "navigationBarTitleText": "选择医生",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/appointment/schedule",
+      "style": {
+        "navigationBarTitleText": "选择时间",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/appointment/confirm",
+      "style": {
+        "navigationBarTitleText": "确认预约",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/articles/index",
+      "style": {
+        "navigationBarTitleText": "健康科普",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/articles/detail",
+      "style": {
+        "navigationBarTitleText": "文章详情",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/export/export",
+      "style": {
+        "navigationBarTitleText": "数据导出",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/search/search",
+      "style": {
+        "navigationBarTitleText": "搜索",
+        "navigationStyle": "custom"
+      }
     }
   ],
   "tabBar": {
     "color": "#8c8c8c",
-    "selectedColor": "#1890ff",
+    "selectedColor": "#37CD87",
     "backgroundColor": "#ffffff",
     "borderStyle": "white",
     "list": [
@@ -119,7 +217,7 @@
   },
   "globalStyle": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "远程医疗",
+    "navigationBarTitleText": "健康管理中心",
     "navigationBarBackgroundColor": "#F8F8F8",
     "backgroundColor": "#F8F8F8"
   },

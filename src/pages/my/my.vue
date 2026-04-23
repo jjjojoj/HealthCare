@@ -4,36 +4,90 @@
 
     <view class="content">
       <view class="user-card">
-        <view class="user-avatar">👤</view>
+        <view class="user-avatar">{{ (userInfo.name || 'U').charAt(0) }}</view>
         <view class="user-info">
           <view class="user-name">{{ userInfo.name || '未登录' }}</view>
           <view class="user-phone">{{ userInfo.phone || '' }}</view>
         </view>
+        <view class="notification-badge" @click="navigateTo('/pages/notification/notification')">
+          <text class="badge-icon">N</text>
+          <view class="badge-dot"></view>
+        </view>
       </view>
 
-      <view class="menu-list">
-        <view class="menu-item" @click="navigateTo('/pages/emergency/emergency')">
-          <view class="menu-icon">🚨</view>
-          <view class="menu-text">紧急联系人</view>
-          <view class="menu-arrow">→</view>
+      <!-- 个人管理 -->
+      <view class="menu-section">
+        <text class="section-label">个人管理</text>
+        <view class="menu-list">
+          <view class="menu-item" @click="navigateTo('/pages/health-profile/health-profile')">
+            <view class="menu-icon" style="background: rgba(250,140,22,0.12); color: #FA8C16;">P</view>
+            <view class="menu-text">健康档案</view>
+            <view class="menu-arrow">></view>
+          </view>
+          <view class="menu-item" @click="navigateTo('/pages/bmi/bmi')">
+            <view class="menu-icon" style="background: rgba(114,46,209,0.12); color: #722ED1;">B</view>
+            <view class="menu-text">BMI健康评估</view>
+            <view class="menu-arrow">></view>
+          </view>
+          <view class="menu-item" @click="navigateTo('/pages/export/export')">
+            <view class="menu-icon" style="background: rgba(245,34,45,0.12); color: #F5222D;">E</view>
+            <view class="menu-text">数据导出</view>
+            <view class="menu-arrow">></view>
+          </view>
         </view>
+      </view>
 
-        <view class="menu-item" @click="navigateTo('/pages/prescription/prescription')">
-          <view class="menu-icon">📝</view>
-          <view class="menu-text">电子处方</view>
-          <view class="menu-arrow">→</view>
+      <!-- 医疗服务 -->
+      <view class="menu-section">
+        <text class="section-label">医疗服务</text>
+        <view class="menu-list">
+          <view class="menu-item" @click="navigateTo('/pages/appointment/index')">
+            <view class="menu-icon" style="background: rgba(55,205,135,0.12); color: #37CD87;">C</view>
+            <view class="menu-text">预约挂号</view>
+            <view class="menu-arrow">></view>
+          </view>
+          <view class="menu-item" @click="navigateTo('/pages/prescription/prescription')">
+            <view class="menu-icon" style="background: rgba(24,144,255,0.12); color: #1890FF;">R</view>
+            <view class="menu-text">电子处方</view>
+            <view class="menu-arrow">></view>
+          </view>
+          <view class="menu-item" @click="navigateTo('/pages/video/video')">
+            <view class="menu-icon" style="background: rgba(19,194,194,0.12); color: #13C2C2;">V</view>
+            <view class="menu-text">视频会诊</view>
+            <view class="menu-arrow">></view>
+          </view>
+          <view class="menu-item" @click="navigateTo('/pages/emergency/emergency')">
+            <view class="menu-icon" style="background: rgba(245,34,45,0.12); color: #F5222D;">!</view>
+            <view class="menu-text">紧急联系人</view>
+            <view class="menu-arrow">></view>
+          </view>
+          <view class="menu-item" @click="navigateTo('/pages/upload/upload')">
+            <view class="menu-icon" style="background: rgba(102,126,234,0.12); color: #667eea;">+</view>
+            <view class="menu-text">上传文件</view>
+            <view class="menu-arrow">></view>
+          </view>
         </view>
+      </view>
 
-        <view class="menu-item" @click="navigateTo('/pages/upload/upload')">
-          <view class="menu-icon">📤</view>
-          <view class="menu-text">上传文件</view>
-          <view class="menu-arrow">→</view>
-        </view>
-
-        <view class="menu-item" @click="navigateTo('/pages/video/video')">
-          <view class="menu-icon">📹</view>
-          <view class="menu-text">视频会诊</view>
-          <view class="menu-arrow">→</view>
+      <!-- 其他 -->
+      <view class="menu-section">
+        <text class="section-label">其他</text>
+        <view class="menu-list">
+          <view class="menu-item" @click="navigateTo('/pages/articles/index')">
+            <view class="menu-icon" style="background: rgba(82,196,26,0.12); color: #52C41A;">A</view>
+            <view class="menu-text">健康科普</view>
+            <view class="menu-arrow">></view>
+          </view>
+          <view class="menu-item" @click="navigateTo('/pages/notification/notification')">
+            <view class="menu-icon" style="background: rgba(250,173,20,0.12); color: #FAAD14;">N</view>
+            <view class="menu-text">消息通知</view>
+            <view class="menu-arrow">></view>
+          </view>
+          <view class="menu-item" @click="navigateTo('/pages/settings/settings')">
+            <view class="menu-icon" style="background: rgba(140,140,140,0.12); color: #8C8C8C;">S</view>
+            <view class="menu-text">设置</view>
+            <view class="menu-arrow">></view>
+          </view>
         </view>
       </view>
 
@@ -77,26 +131,25 @@ const logout = () => {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .page {
   min-height: 100vh;
-  background: #F8F9FA;
+  background: #F5F5F5;
   padding-bottom: 100rpx;
 }
 
 .content {
-  padding: 20rpx 16rpx;
+  padding: 20rpx 24rpx;
 }
 
 .user-card {
   background: linear-gradient(135deg, #37CD87 0%, #2DB873 100%);
-  border-radius: 18rpx;
+  border-radius: 20rpx;
   padding: 40rpx 32rpx;
   display: flex;
   align-items: center;
-  margin-bottom: 20rpx;
+  margin-bottom: 28rpx;
   box-shadow: 0 8rpx 24rpx rgba(55, 205, 135, 0.28);
-  transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
 }
@@ -110,26 +163,21 @@ const logout = () => {
   height: 180rpx;
   background: rgba(255, 255, 255, 0.08);
   border-radius: 50%;
-  /* #ifdef H5 */
-  filter: blur(35rpx);
-  /* #endif */
 }
 
 .user-avatar {
-  width: 120rpx;
-  height: 120rpx;
+  width: 100rpx;
+  height: 100rpx;
   background: rgba(255, 255, 255, 0.2);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 60rpx;
-  margin-right: 28rpx;
-  box-shadow: 0 6rpx 16rpx rgba(0, 0, 0, 0.15);
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #fff;
+  margin-right: 24rpx;
   border: 3rpx solid rgba(255, 255, 255, 0.5);
-  /* #ifdef H5 */
-  backdrop-filter: blur(12rpx);
-  /* #endif */
   position: relative;
   z-index: 1;
 }
@@ -144,87 +192,113 @@ const logout = () => {
   font-size: 34rpx;
   font-weight: 700;
   color: white;
-  margin-bottom: 10rpx;
-  text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+  margin-bottom: 8rpx;
 }
 
 .user-phone {
   font-size: 24rpx;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.notification-badge {
+  width: 72rpx;
+  height: 72rpx;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.badge-icon {
+  font-size: 28rpx;
+  color: #fff;
+  font-weight: 600;
+}
+
+.badge-dot {
+  position: absolute;
+  top: 8rpx;
+  right: 8rpx;
+  width: 14rpx;
+  height: 14rpx;
+  border-radius: 50%;
+  background: #F5222D;
+}
+
+.section-label {
+  font-size: 24rpx;
+  color: #8C8C8C;
   font-weight: 500;
+  margin-bottom: 12rpx;
+  margin-left: 4rpx;
+  display: block;
+}
+
+.menu-section {
+  margin-bottom: 24rpx;
 }
 
 .menu-list {
-  background: white;
-  border-radius: 14rpx;
+  background: #fff;
+  border-radius: 16rpx;
   overflow: hidden;
-  margin-bottom: 20rpx;
-  box-shadow: 0 6rpx 18rpx rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
 }
 
 .menu-item {
   display: flex;
   align-items: center;
   padding: 28rpx 24rpx;
-  border-bottom: 1rpx solid #F0F0F0;
-  transition: all 0.3s ease;
-  position: relative;
-}
+  border-bottom: 1rpx solid #F5F5F5;
 
-.menu-item:last-child {
-  border-bottom: none;
-}
+  &:last-child { border-bottom: none; }
 
-.menu-item:active {
-  background: linear-gradient(90deg, rgba(55, 205, 135, 0.08) 0%, transparent 100%);
-  transform: translateX(6rpx);
+  &:active {
+    background: #FAFAFA;
+  }
 }
 
 .menu-icon {
-  font-size: 38rpx;
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 14rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-right: 20rpx;
-  width: 44rpx;
-  text-align: center;
+  font-size: 24rpx;
+  font-weight: 700;
+  flex-shrink: 0;
 }
 
 .menu-text {
   flex: 1;
   font-size: 28rpx;
-  color: #333333;
+  color: #262626;
   font-weight: 500;
 }
 
 .menu-arrow {
-  font-size: 28rpx;
-  color: #CCCCCC;
-  transition: all 0.3s ease;
-}
-
-.menu-item:active .menu-arrow {
-  color: #37CD87;
-  transform: translateX(8rpx);
+  font-size: 24rpx;
+  color: #C0C0C0;
 }
 
 .logout-section {
-  padding: 16rpx 0;
+  padding: 24rpx 0;
 }
 
 .logout-btn {
   width: 100%;
   height: 88rpx;
-  background: white;
+  background: #fff;
   color: #FF4D4F;
   border: 2rpx solid #FFCCC7;
-  border-radius: 12rpx;
+  border-radius: 16rpx;
   font-size: 30rpx;
   font-weight: 600;
-  box-shadow: 0 4rpx 12rpx rgba(255, 77, 79, 0.12);
-  transition: all 0.3s ease;
-}
-
-.logout-btn:active {
-  background: #FFF1F0;
-  transform: translateY(2rpx);
-  box-shadow: 0 2rpx 8rpx rgba(255, 77, 79, 0.15);
+  box-shadow: 0 2rpx 12rpx rgba(255, 77, 79, 0.08);
 }
 </style>

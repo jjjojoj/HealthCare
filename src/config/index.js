@@ -44,7 +44,8 @@ export default {
   storageKeys: {
     token: 'healthcare_token',
     userInfo: 'healthcare_userInfo',
-    language: 'healthcare_language'
+    language: 'healthcare_language',
+    onboardingDone: 'healthcare_onboarding_done'
   }
 }
 

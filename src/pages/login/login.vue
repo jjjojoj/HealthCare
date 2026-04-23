@@ -67,8 +67,8 @@ const login = async () => {
 
       setTimeout(() => {
         loading.value = false
-        // 使用 switchTab 跳转到首页（因为首页在 tabBar 中）
-        uni.switchTab({ url: '/pages/home/home' })
+        // 使用 reLaunch 跳转，因为可能从 splash/onboarding 进入，非 tabBar 上下文
+        uni.reLaunch({ url: '/pages/home/home' })
       }, 1000)
     } else {
       loading.value = false

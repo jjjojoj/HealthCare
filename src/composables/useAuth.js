@@ -143,6 +143,38 @@ export function useAuth() {
     return userInfo.value?.role === 'clinician'
   })
 
+  /**
+   * 检查是否已完成新手引导
+   */
+  const isOnboardingDone = () => {
+    return !!getStorage(config.storageKeys.onboardingDone, false)
+  }
+
+  /**
+   * 标记新手引导已完成
+   */
+  const setOnboardingDone = () => {
+    setStorage(config.storageKeys.onboardingDone, true)
+  }
+
+  /**
+   * 获取启动目标页面（供 splash 页调用）
+   * 逻辑：未登录 + 未引导 → onboarding，未登录 + 已引导 → login，已登录 → home
+   */
+  const getLaunchTarget = () => {
+    const hasToken = !!getStorage(config.storageKeys.token)
+    const done = isOnboardingDone()
+
+    if (!hasToken && !done) {
+      return '/pages/onboarding/onboarding'
+    }
+    if (!hasToken && done) {
+      return '/pages/login/login'
+    }
+    // 已登录，直接进首页
+    return '/pages/home/home'
+  }
+
   return {
     // 状态
     token,
@@ -157,6 +189,9 @@ export function useAuth() {
     logout,
     checkAuth,
     updateUserInfo,
-    getToken
+    getToken,
+    isOnboardingDone,
+    setOnboardingDone,
+    getLaunchTarget
   }
 }

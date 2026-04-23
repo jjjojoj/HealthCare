@@ -3,6 +3,12 @@
     <AppHeader title="健康中心" />
 
     <view class="home-container">
+      <!-- 搜索栏 -->
+      <view class="search-bar" @click="navigateTo('/pages/search/search')">
+        <text class="search-icon">/</text>
+        <text class="search-placeholder">搜索病历、药品、科普文章...</text>
+      </view>
+
       <!-- 用户信息卡片 - 增强版 -->
       <view class="user-info-card">
         <view class="card-background">
@@ -38,55 +44,59 @@
         </view>
       </view>
 
-      <!-- 快捷功能区域 - 增强版 -->
+      <!-- 快捷功能区域 - 8宫格 -->
       <view class="quick-actions-section">
         <view class="section-title">快捷服务</view>
         <view class="section-subtitle">一键直达常用功能</view>
         
-        <view class="quick-actions">
-          <view class="action-card upload-card" @click="navigateTo('/pages/upload/upload')">
-            <view class="action-left">
-              <view class="action-icon">
-                <text class="icon-text">📤</text>
-              </view>
-              <view class="action-content">
-                <view class="action-title">上传检查</view>
-                <view class="action-desc">AI智能分析</view>
-              </view>
+        <view class="quick-grid">
+          <view class="grid-item" @click="navigateTo('/pages/upload/upload')">
+            <view class="grid-icon" style="background: rgba(102,126,234,0.12);">
+              <text class="grid-icon-text" style="color: #667eea;">+</text>
             </view>
-            <view class="action-right">
-              <view class="action-arrow">→</view>
-            </view>
+            <text class="grid-label">上传检查</text>
           </view>
-
-          <view class="action-card medication-card" @click="navigateTo('/pages/meds/meds')">
-            <view class="action-left">
-              <view class="action-icon">
-                <text class="icon-text">💊</text>
-              </view>
-              <view class="action-content">
-                <view class="action-title">用药助手</view>
-                <view class="action-desc">智能提醒</view>
-              </view>
+          <view class="grid-item" @click="navigateTo('/pages/meds/meds')">
+            <view class="grid-icon" style="background: rgba(240,147,251,0.12);">
+              <text class="grid-icon-text" style="color: #f093fb;">Rx</text>
             </view>
-            <view class="action-right">
-              <view class="action-arrow">→</view>
-            </view>
+            <text class="grid-label">用药助手</text>
           </view>
-
-          <view class="action-card analysis-card" @click="navigateTo('/pages/trends/trends')">
-            <view class="action-left">
-              <view class="action-icon">
-                <text class="icon-text">📊</text>
-              </view>
-              <view class="action-content">
-                <view class="action-title">健康分析</view>
-                <view class="action-desc">数据洞察</view>
-              </view>
+          <view class="grid-item" @click="navigateTo('/pages/trends/trends')">
+            <view class="grid-icon" style="background: rgba(79,172,254,0.12);">
+              <text class="grid-icon-text" style="color: #4facfe;">T</text>
             </view>
-            <view class="action-right">
-              <view class="action-arrow">→</view>
+            <text class="grid-label">健康分析</text>
+          </view>
+          <view class="grid-item" @click="navigateTo('/pages/appointment/index')">
+            <view class="grid-icon" style="background: rgba(55,205,135,0.12);">
+              <text class="grid-icon-text" style="color: #37CD87;">C</text>
             </view>
+            <text class="grid-label">预约挂号</text>
+          </view>
+          <view class="grid-item" @click="navigateTo('/pages/health-profile/health-profile')">
+            <view class="grid-icon" style="background: rgba(250,140,22,0.12);">
+              <text class="grid-icon-text" style="color: #FA8C16;">P</text>
+            </view>
+            <text class="grid-label">健康档案</text>
+          </view>
+          <view class="grid-item" @click="navigateTo('/pages/bmi/bmi')">
+            <view class="grid-icon" style="background: rgba(114,46,209,0.12);">
+              <text class="grid-icon-text" style="color: #722ED1;">B</text>
+            </view>
+            <text class="grid-label">BMI评估</text>
+          </view>
+          <view class="grid-item" @click="navigateTo('/pages/articles/index')">
+            <view class="grid-icon" style="background: rgba(19,194,194,0.12);">
+              <text class="grid-icon-text" style="color: #13C2C2;">A</text>
+            </view>
+            <text class="grid-label">健康科普</text>
+          </view>
+          <view class="grid-item" @click="navigateTo('/pages/export/export')">
+            <view class="grid-icon" style="background: rgba(245,34,45,0.12);">
+              <text class="grid-icon-text" style="color: #F5222D;">E</text>
+            </view>
+            <text class="grid-label">数据导出</text>
           </view>
         </view>
       </view>
@@ -390,6 +400,29 @@ const formatDate = (date) => {
   }
 }
 
+// 搜索栏
+.search-bar {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 40rpx;
+  padding: 16rpx 28rpx;
+  margin: 16rpx 0 24rpx;
+  gap: 12rpx;
+  backdrop-filter: blur(10rpx);
+  border: 1rpx solid rgba(255, 255, 255, 0.15);
+
+  .search-icon {
+    font-size: 28rpx;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .search-placeholder {
+    font-size: 26rpx;
+    color: rgba(255, 255, 255, 0.5);
+  }
+}
+
 // 快捷功能区域
 .quick-actions-section {
   margin-bottom: 32rpx;
@@ -409,140 +442,48 @@ const formatDate = (date) => {
   }
 }
 
-.quick-actions {
+.quick-grid {
   display: flex;
-  flex-direction: column;
-  gap: 20rpx;
-  
-  .action-card {
+  flex-wrap: wrap;
+  gap: 16rpx;
+
+  .grid-item {
+    width: calc((100% - 32rpx) / 3);
     background: rgba(255, 255, 255, 0.95);
-    border-radius: 20rpx;
-    padding: 24rpx;
+    border-radius: 16rpx;
+    padding: 24rpx 12rpx;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    box-shadow: 
-      0 12rpx 40rpx rgba(0, 0, 0, 0.08),
-      0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+    gap: 12rpx;
+    box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.06);
     backdrop-filter: blur(20rpx);
     border: 1px solid rgba(255, 255, 255, 0.3);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
-    
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.1) 100%);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-    
+    transition: all 0.3s ease;
+
     &:active {
-      transform: translateY(-6rpx);
-      box-shadow: 
-        0 20rpx 60rpx rgba(0, 0, 0, 0.12),
-        0 8rpx 24rpx rgba(0, 0, 0, 0.08);
-      
-      &::before {
-        opacity: 1;
-      }
-    }
-    
-    &.upload-card {
-      border-left: 6rpx solid #667eea;
-      
-      .action-icon {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      }
-    }
-    
-    &.medication-card {
-      border-left: 6rpx solid #f093fb;
-      
-      .action-icon {
-        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-      }
-    }
-    
-    &.analysis-card {
-      border-left: 6rpx solid #4facfe;
-      
-      .action-icon {
-        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-      }
+      transform: scale(0.95);
     }
   }
-  
-  .action-left {
-    display: flex;
-    align-items: center;
-    flex: 1;
-  }
-  
-  .action-icon {
-    width: 80rpx;
-    height: 80rpx;
-    border-radius: 20rpx;
+
+  .grid-icon {
+    width: 72rpx;
+    height: 72rpx;
+    border-radius: 18rpx;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 20rpx;
-    position: relative;
-    box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.15);
-    
-    &::after {
-      content: '';
-      position: absolute;
-      top: -2rpx;
-      left: -2rpx;
-      right: -2rpx;
-      bottom: -2rpx;
-      border-radius: 22rpx;
-      background: inherit;
-      opacity: 0.3;
-      animation: glow-pulse 3s ease-in-out infinite;
-    }
-    
-    .icon-text {
-      font-size: 36rpx;
-      color: white;
-      font-weight: 600;
-    }
   }
-  
-  .action-content {
-    flex: 1;
-    
-    .action-title {
-      font-size: 32rpx;
-      font-weight: 600;
-      color: #2c3e50;
-      margin-bottom: 8rpx;
-    }
-    
-    .action-desc {
-      font-size: 24rpx;
-      color: #7f8c8d;
-      line-height: 1.4;
-    }
+
+  .grid-icon-text {
+    font-size: 28rpx;
+    font-weight: 700;
   }
-  
-  .action-right {
-    .action-arrow {
-      font-size: 32rpx;
-      color: #bdc3c7;
-      transition: all 0.3s ease;
-    }
-  }
-  
-  .action-card:active .action-arrow {
-    color: #3498db;
-    transform: translateX(6rpx);
+
+  .grid-label {
+    font-size: 24rpx;
+    color: #595959;
+    font-weight: 500;
   }
 }
 
