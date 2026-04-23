@@ -4,8 +4,6 @@
 
 **智能健康管理平台** — 病历管理 / 健康监测 / AI 咨询 / 预约挂号
 
-**在线体验：** [http://localhost:5174](http://localhost:5174)（本地部署）
-
 ![Vue 3](https://img.shields.io/badge/Vue-3-42b883?logo=vue.js)
 ![uni-app](https://img.shields.io/badge/uni--app-5.08-brightgreen)
 ![Vite](https://img.shields.io/badge/Vite-5-646cff?logo=vite)
