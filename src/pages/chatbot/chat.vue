@@ -125,6 +125,11 @@
         </view>
       </scroll-view>
 
+      <!-- AI免责声明 -->
+      <view class="ai-disclaimer">
+        <text class="disclaimer-text">🤖 AI助手仅供演示参考，不构成医疗建议</text>
+      </view>
+
       <!-- 输入区域 -->
       <view class="chat-input">
         <view 
@@ -160,6 +165,9 @@ import { ref, onMounted, nextTick } from 'vue'
 import AppHeader from '@/components/AppHeader.vue'
 import BottomNav from '@/components/BottomNav.vue'
 import recordsData from '@/static/mock/records.json'
+import { useAuthGuard } from '@/composables/useAuthGuard'
+
+useAuthGuard()
 
 // 状态管理
 const messages = ref([])
@@ -321,12 +329,15 @@ const sendMessage = () => {
 const generateResponse = (userInput) => {
   const input = userInput.toLowerCase()
   
+  // AI免责声明
+  const disclaimer = '（本回复由AI生成，仅供演示参考，不构成任何医疗诊断或治疗建议，请以专业医生意见为准。）'
+  
   // 病历相关
-  if (input.includes('病历') || input.includes('记录') || input.includes('检查')) {
+  if (input.includes('病历') || input.includes('记录') || input.includes('检查') || input.includes('化验')) {
     const record = recordsData.records[0] // 使用第一条病历
     return {
       type: 'bot',
-      content: '我查看了您最近的病历记录。以下是详细分析：',
+      content: '我查看了您最近的病历记录。以下是详细分析：\n' + disclaimer,
       timestamp: new Date().toISOString(),
       diagnosisCard: {
         brief_summary: record.summary_text,
@@ -348,13 +359,13 @@ const generateResponse = (userInput) => {
     }
   }
   
-  // 皮肤问题
-  if (input.includes('皮肤') || input.includes('红') || input.includes('痒') || input.includes('斑')) {
+  // 皮肤/过敏问题
+  if (input.includes('皮肤') || input.includes('痒') || input.includes('过敏') || input.includes('荨麻疹')) {
     const skinRecord = recordsData.records.find(r => r.id === 1)
     if (skinRecord) {
       return {
         type: 'bot',
-        content: '根据您的皮肤症状描述和之前的检查记录，我为您做出以下分析：',
+        content: '根据您的皮肤症状描述和之前的检查记录，我为您做出以下分析：\n' + disclaimer,
         timestamp: new Date().toISOString(),
         diagnosisCard: {
           brief_summary: skinRecord.summary_text,
@@ -366,7 +377,7 @@ const generateResponse = (userInput) => {
             },
             {
               name: '过敏性皮疹',
-              description: '由过敏反应引起的皮肤病变',
+              description: '由过敏反应引起的皮肤病变，可能与食物、药物或环境因素有关',
               confidence: 0.72
             }
           ],
@@ -382,28 +393,35 @@ const generateResponse = (userInput) => {
     }
   }
   
-  // 肺部/胸部问题
-  if (input.includes('肺') || input.includes('胸') || input.includes('咳嗽') || input.includes('呼吸')) {
+  // 肺部/胸部/感冒/流感问题
+  if (input.includes('肺') || input.includes('胸') || input.includes('咳嗽') || input.includes('呼吸') ||
+      input.includes('感冒') || input.includes('流感') || input.includes('鼻塞')) {
     const xrayRecord = recordsData.records.find(r => r.id === 2)
     if (xrayRecord) {
       return {
         type: 'bot',
-        content: '根据您的X光检查结果，情况良好：',
+        content: '根据您的症状和X光检查结果，我为您做出以下分析：\n' + disclaimer,
         timestamp: new Date().toISOString(),
         diagnosisCard: {
           brief_summary: xrayRecord.summary_text,
           possible_conditions: [
             {
-              name: '肺部健康',
-              description: '未检测到明显异常，肺部清晰，心影正常',
-              confidence: 0.95
+              name: '上呼吸道感染',
+              description: '由病毒引起的鼻腔、咽部或喉部感染，常见症状包括鼻塞、咳嗽、咽痛等',
+              confidence: 0.87
+            },
+            {
+              name: '急性支气管炎',
+              description: '支气管黏膜的急性炎症，常伴随咳嗽、咳痰等症状',
+              confidence: 0.76
             }
           ],
           recommended_next_steps: [
-            '继续保持良好的生活习惯',
-            '避免吸烟和二手烟',
-            '定期进行健康体检',
-            '如出现咳嗽、胸痛等症状，及时就医'
+            '多饮温水，注意休息',
+            '保持室内空气流通',
+            '可服用对症缓解药物（如退烧、止咳药）',
+            '如持续高热超过3天或呼吸困难，请及时就医',
+            '避免吸烟和二手烟'
           ],
           tags: xrayRecord.image_analysis.tags
         }
@@ -411,13 +429,141 @@ const generateResponse = (userInput) => {
     }
   }
   
-  // 血液/感染
-  if (input.includes('血') || input.includes('感染') || input.includes('发烧') || input.includes('白细胞')) {
+  // 头痛/头疼
+  if (input.includes('头痛') || input.includes('头疼')) {
+    return {
+      type: 'bot',
+      content: '关于您的头痛症状，我为您做以下分析：\n' + disclaimer,
+      timestamp: new Date().toISOString(),
+      diagnosisCard: {
+        brief_summary: '头痛是常见症状，可能由多种原因引起。根据描述，需进一步明确头痛的类型和伴随症状。',
+        possible_conditions: [
+          {
+            name: '紧张性头痛',
+            description: '最常见的头痛类型，常表现为头部两侧持续性压迫感或紧缩感，与精神紧张、疲劳有关',
+            confidence: 0.82
+          },
+          {
+            name: '偏头痛',
+            description: '反复发作的单侧搏动性头痛，可伴恶心、呕吐、畏光畏声，发作前可有视觉先兆',
+            confidence: 0.68
+          }
+        ],
+        recommended_next_steps: [
+          '记录头痛发作时间、部位和持续时间',
+          '保证充足睡眠，避免过度疲劳',
+          '减少屏幕使用时间，注意用眼卫生',
+          '适当放松，缓解精神压力',
+          '如头痛剧烈、突然发作或伴随神经系统症状，请立即就医'
+        ],
+        tags: ['头痛', '紧张性头痛', '偏头痛', '神经系统']
+      }
+    }
+  }
+  
+  // 失眠/睡眠问题
+  if (input.includes('失眠') || input.includes('睡不好') || input.includes('睡眠')) {
+    return {
+      type: 'bot',
+      content: '关于您的睡眠问题，我为您做以下分析：\n' + disclaimer,
+      timestamp: new Date().toISOString(),
+      diagnosisCard: {
+        brief_summary: '睡眠质量下降可能由多种因素引起，包括心理压力、生活习惯、环境因素等。',
+        possible_conditions: [
+          {
+            name: '失眠症',
+            description: '以入睡困难、睡眠维持困难或早醒为主要表现的睡眠障碍，持续超过3个月为慢性失眠',
+            confidence: 0.85
+          },
+          {
+            name: '睡眠呼吸暂停综合征',
+            description: '睡眠期间反复出现呼吸暂停，导致睡眠片段化，白天嗜睡乏力',
+            confidence: 0.62
+          }
+        ],
+        recommended_next_steps: [
+          '建立规律的作息时间，每天固定时间上床和起床',
+          '睡前避免使用电子设备和刺激性饮品（咖啡、浓茶）',
+          '营造安静、黑暗、舒适的睡眠环境',
+          '适当运动，但避免睡前2小时内剧烈运动',
+          '如失眠持续超过1个月，建议就医进行睡眠评估'
+        ],
+        tags: ['失眠', '睡眠障碍', '入睡困难', '睡眠质量']
+      }
+    }
+  }
+  
+  // 胃肠问题
+  if (input.includes('胃痛') || input.includes('腹泻') || input.includes('拉肚子') || input.includes('恶心') || input.includes('胃')) {
+    return {
+      type: 'bot',
+      content: '关于您的胃肠症状，我为您做以下分析：\n' + disclaimer,
+      timestamp: new Date().toISOString(),
+      diagnosisCard: {
+        brief_summary: '消化系统症状较常见，可能与饮食不当、感染、功能紊乱等因素有关。',
+        possible_conditions: [
+          {
+            name: '急性胃肠炎',
+            description: '由细菌、病毒或不洁食物引起的胃肠道急性炎症，表现为恶心、呕吐、腹痛、腹泻等',
+            confidence: 0.83
+          },
+          {
+            name: '功能性消化不良',
+            description: '无器质性病变的消化系统症状群，常表现为上腹部不适、早饱、恶心等',
+            confidence: 0.75
+          }
+        ],
+        recommended_next_steps: [
+          '清淡饮食，避免辛辣油腻食物',
+          '少量多餐，细嚼慢咽',
+          '注意饮食卫生，避免食用不洁食物',
+          '补充足够水分，防止脱水',
+          '如出现血便、持续高热或剧烈腹痛，请立即就医'
+        ],
+        tags: ['胃肠炎', '胃痛', '腹泻', '消化系统']
+      }
+    }
+  }
+  
+  // 血糖/糖尿病
+  if (input.includes('血糖') || input.includes('糖尿病')) {
+    return {
+      type: 'bot',
+      content: '关于血糖管理和糖尿病相关问题，我为您提供以下建议：\n' + disclaimer,
+      timestamp: new Date().toISOString(),
+      diagnosisCard: {
+        brief_summary: '血糖管理是糖尿病预防和控制的核心，需要综合饮食、运动和药物干预。',
+        possible_conditions: [
+          {
+            name: '2型糖尿病',
+            description: '最常见的糖尿病类型，以胰岛素抵抗和相对胰岛素分泌不足为特征，多见于中老年',
+            confidence: 0.78
+          },
+          {
+            name: '糖耐量异常',
+            description: '介于正常血糖和糖尿病之间的代谢状态，是糖尿病的重要预警信号',
+            confidence: 0.84
+          }
+        ],
+        recommended_next_steps: [
+          '每日监测空腹和餐后血糖',
+          '控制碳水化合物摄入，选择低GI食物',
+          '坚持规律运动，每周至少150分钟中等强度有氧运动',
+          '定期检查糖化血红蛋白（HbA1c）',
+          '遵医嘱用药，不可擅自停药或调量'
+        ],
+        tags: ['血糖管理', '糖尿病', '糖化血红蛋白', '代谢综合征']
+      }
+    }
+  }
+  
+  // 血液/感染/发烧
+  if (input.includes('血') || input.includes('感染') || input.includes('发烧') || input.includes('白细胞') || input.includes('体温')) {
     const bloodRecord = recordsData.records.find(r => r.id === 3)
     if (bloodRecord) {
       return {
         type: 'bot',
-        content: '您的血液检查报告显示以下情况：',
+        content: '您的血液检查报告显示以下情况：\n' + disclaimer,
         timestamp: new Date().toISOString(),
         diagnosisCard: {
           brief_summary: bloodRecord.summary_text,
@@ -447,7 +593,7 @@ const generateResponse = (userInput) => {
     if (ecgRecord) {
       return {
         type: 'bot',
-        content: '您的心电图检查结果显示：',
+        content: '您的心电图检查结果显示：\n' + disclaimer,
         timestamp: new Date().toISOString(),
         diagnosisCard: {
           brief_summary: ecgRecord.summary_text,
@@ -471,10 +617,10 @@ const generateResponse = (userInput) => {
   }
   
   // 用药咨询
-  if (input.includes('药') || input.includes('吃药') || input.includes('服药')) {
+  if (input.includes('用药') || input.includes('吃药') || input.includes('药物') || input.includes('服药')) {
     return {
       type: 'bot',
-      content: '关于用药方面，我为您提供以下建议：',
+      content: '关于用药方面，我为您提供以下建议：\n' + disclaimer,
       timestamp: new Date().toISOString(),
       diagnosisCard: {
         brief_summary: '用药需要严格遵循医嘱，不可擅自增减剂量或停药',
@@ -482,11 +628,157 @@ const generateResponse = (userInput) => {
         recommended_next_steps: [
           '严格按照医生处方用药',
           '注意药物的服用时间和剂量',
-          '了解可能的副作用',
+          '了解可能的副作用和注意事项',
           '如有不适，及时咨询医生',
-          '不要与其他药物随意搭配'
+          '不要与其他药物随意搭配',
+          '药品需存放在阴凉干燥处，注意有效期'
         ],
-        tags: ['用药安全', '遵医嘱', '按时服药']
+        tags: ['用药安全', '遵医嘱', '按时服药', '药物相互作用']
+      }
+    }
+  }
+  
+  // 预约/挂号/看病
+  if (input.includes('预约') || input.includes('挂号') || input.includes('看病') || input.includes('就诊')) {
+    return {
+      type: 'bot',
+      content: '关于预约挂号和就诊，我为您提供以下信息：\n' + disclaimer,
+      timestamp: new Date().toISOString(),
+      diagnosisCard: {
+        brief_summary: '合理规划就诊流程，准备好相关资料，可以提高就诊效率。',
+        possible_conditions: [],
+        recommended_next_steps: [
+          '通过医院官方渠道进行预约挂号',
+          '就诊前准备好既往病历、检查报告和用药清单',
+          '提前整理要向医生描述的症状和问题',
+          '就诊时如实告知医生过敏史和用药史',
+          '就诊后妥善保管处方和医嘱',
+          '按时复诊，遵医嘱进行后续治疗'
+        ],
+        tags: ['预约挂号', '就诊流程', '门诊', '医嘱']
+      }
+    }
+  }
+  
+  // 体检
+  if (input.includes('体检') || input.includes('化验')) {
+    return {
+      type: 'bot',
+      content: '关于健康体检，我为您提供以下建议：\n' + disclaimer,
+      timestamp: new Date().toISOString(),
+      diagnosisCard: {
+        brief_summary: '定期体检是健康管理的重要组成部分，有助于早期发现潜在健康问题。',
+        possible_conditions: [],
+        recommended_next_steps: [
+          '建议每年进行一次全面体检',
+          '体检前保持正常饮食和作息，避免饮酒',
+          '体检当天空腹（8-12小时）进行抽血检查',
+          '根据年龄和家族史选择针对性检查项目',
+          '妥善保管体检报告，便于对比分析'
+        ],
+        tags: ['健康体检', '定期检查', '预防医学', '健康管理']
+      }
+    }
+  }
+  
+  // 运动/锻炼/健身
+  if (input.includes('运动') || input.includes('锻炼') || input.includes('健身')) {
+    return {
+      type: 'bot',
+      content: '关于运动锻炼与健康的关系，我为您提供以下建议：\n' + disclaimer,
+      timestamp: new Date().toISOString(),
+      diagnosisCard: {
+        brief_summary: '适量运动有助于改善心血管健康、控制体重、增强免疫力，但需根据个人身体状况选择合适的运动方式。',
+        possible_conditions: [],
+        recommended_next_steps: [
+          '每周进行至少150分钟中等强度有氧运动（如快走、游泳）',
+          '运动前做好热身，运动后进行拉伸放松',
+          '循序渐进增加运动强度，避免突然剧烈运动',
+          '有慢性病的患者运动前需咨询医生',
+          '注意运动时的心率和身体反应，避免过度运动'
+        ],
+        tags: ['运动处方', '有氧运动', '体能训练', '运动安全']
+      }
+    }
+  }
+  
+  // 饮食/营养/减肥
+  if (input.includes('饮食') || input.includes('营养') || input.includes('减肥') || input.includes('体重')) {
+    return {
+      type: 'bot',
+      content: '关于饮食营养和体重管理，我为您提供以下建议：\n' + disclaimer,
+      timestamp: new Date().toISOString(),
+      diagnosisCard: {
+        brief_summary: '均衡饮食是维持健康的基础，合理的营养搭配有助于预防慢性病和管理体重。',
+        possible_conditions: [],
+        recommended_next_steps: [
+          '遵循中国居民膳食指南，保证食物多样化',
+          '每日摄入足够的蔬菜水果（500g以上）',
+          '控制盐、糖、油的摄入量',
+          '规律进餐，避免暴饮暴食',
+          '如有特殊疾病（如糖尿病、肾病），请遵医嘱调整饮食'
+        ],
+        tags: ['营养均衡', '膳食指南', '体重管理', '健康饮食']
+      }
+    }
+  }
+  
+  // 心理/焦虑/压力
+  if (input.includes('心理') || input.includes('焦虑') || input.includes('压力') || input.includes('抑郁') || input.includes('情绪')) {
+    return {
+      type: 'bot',
+      content: '关于心理健康问题，我为您提供以下分析和建议：\n' + disclaimer,
+      timestamp: new Date().toISOString(),
+      diagnosisCard: {
+        brief_summary: '心理健康与身体健康密切相关，长期的精神压力和焦虑情绪可能引发多种躯体症状。',
+        possible_conditions: [
+          {
+            name: '广泛性焦虑障碍',
+            description: '过度、持续地担忧日常事务，伴随紧张不安、注意力难以集中、睡眠障碍等症状',
+            confidence: 0.80
+          },
+          {
+            name: '适应障碍',
+            description: '面对生活变化或压力事件时出现的情绪和行为反应，通常在事件发生后3个月内出现',
+            confidence: 0.77
+          }
+        ],
+        recommended_next_steps: [
+          '学习放松技巧，如深呼吸、冥想、渐进式肌肉放松',
+          '保持规律的作息和适度的体育锻炼',
+          '与家人朋友倾诉，建立良好的社会支持系统',
+          '减少咖啡因和酒精的摄入',
+          '如焦虑或低落情绪持续超过2周，建议寻求专业心理咨询'
+        ],
+        tags: ['心理健康', '焦虑', '压力管理', '心理咨询']
+      }
+    }
+  }
+  
+  // 血压
+  if (input.includes('血压')) {
+    return {
+      type: 'bot',
+      content: '关于血压管理和高血压相关问题，我为您提供以下建议：\n' + disclaimer,
+      timestamp: new Date().toISOString(),
+      diagnosisCard: {
+        brief_summary: '血压管理是心血管健康的重要指标，正常血压范围为收缩压<120mmHg，舒张压<80mmHg。',
+        possible_conditions: [
+          {
+            name: '原发性高血压',
+            description: '以血压持续升高为主要表现的慢性疾病，是心脑血管疾病的重要危险因素',
+            confidence: 0.86
+          }
+        ],
+        recommended_next_steps: [
+          '每日定时测量血压并记录',
+          '低盐饮食（每日钠摄入<5g）',
+          '规律运动，控制体重',
+          '戒烟限酒',
+          '遵医嘱服用降压药物，不可擅自停药',
+          '定期复查，监测血压变化趋势'
+        ],
+        tags: ['血压管理', '高血压', '心血管健康', '降压治疗']
       }
     }
   }
@@ -495,7 +787,7 @@ const generateResponse = (userInput) => {
   if (input.includes('紧急') || input.includes('急救') || input.includes('危险') || input.includes('严重')) {
     return {
       type: 'bot',
-      content: '⚠️ 如果您遇到紧急医疗情况，请立即采取行动：',
+      content: '⚠️ 如果您遇到紧急医疗情况，请立即采取行动：\n' + disclaimer,
       timestamp: new Date().toISOString(),
       diagnosisCard: {
         brief_summary: '紧急情况需要专业医疗救助，请不要延误',
@@ -512,11 +804,11 @@ const generateResponse = (userInput) => {
     }
   }
   
-  // 健康指标
-  if (input.includes('血压') || input.includes('血糖') || input.includes('指标') || input.includes('健康')) {
+  // 健康指标（通用）
+  if (input.includes('指标') || input.includes('健康')) {
     return {
       type: 'bot',
-      content: '关于健康指标监测，我为您提供以下建议：',
+      content: '关于健康指标监测，我为您提供以下建议：\n' + disclaimer,
       timestamp: new Date().toISOString(),
       diagnosisCard: {
         brief_summary: '定期监测健康指标有助于及早发现健康问题',
@@ -536,7 +828,7 @@ const generateResponse = (userInput) => {
   // 默认回复
   return {
     type: 'bot',
-    content: '感谢您的咨询。作为AI医疗助手，我可以为您提供健康建议和病历分析。您可以询问关于病历、症状、用药等方面的问题。如需专业诊断，请咨询医生。',
+    content: '感谢您的咨询。作为AI医疗助手，我可以为您提供健康建议和病历分析。您可以询问关于病历、症状、用药等方面的问题。如需专业诊断，请咨询医生。\n' + disclaimer,
     timestamp: new Date().toISOString(),
     diagnosisCard: {
       brief_summary: '我可以帮您解答各类健康问题',
@@ -979,6 +1271,19 @@ const getConfidenceClass = (confidence) => {
 }
 
 /* 输入区域 */
+.ai-disclaimer {
+  padding: 12rpx 20rpx;
+  background: #f5f5f5;
+  text-align: center;
+  border-top: 2rpx solid #eeeeee;
+}
+
+.disclaimer-text {
+  font-size: 22rpx;
+  color: #999999;
+  line-height: 1.5;
+}
+
 .chat-input {
   display: flex;
   align-items: center;

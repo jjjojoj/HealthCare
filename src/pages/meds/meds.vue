@@ -85,8 +85,8 @@
               </view>
             </view>
             <view class="med-code">ATC: {{ med.atc_code }}</view>
-            <view class="med-notes">{{ med.notes.slice(0, 50) }}...</view>
-            <view class="interaction-badge" v-if="med.interactions.length > 0">
+            <view class="med-notes">{{ (med.notes || '').slice(0, 50) }}{{ med.notes && med.notes.length > 50 ? '...' : '' }}</view>
+            <view class="interaction-badge" v-if="med.interactions && med.interactions.length > 0">
               <text class="badge-text">⚠️ {{ med.interactions.length }} 个相互作用</text>
             </view>
           </view>
@@ -125,7 +125,7 @@
             <view class="detail-value notes">{{ selectedMed.notes }}</view>
           </view>
 
-          <view class="detail-item" v-if="selectedMed.interactions.length > 0">
+          <view class="detail-item" v-if="selectedMed.interactions && selectedMed.interactions.length > 0">
             <view class="detail-label">药物相互作用</view>
             <view class="interaction-list">
               <view 
@@ -262,6 +262,9 @@ import { ref, computed } from 'vue'
 import AppHeader from '@/components/AppHeader.vue'
 import BottomNav from '@/components/BottomNav.vue'
 import medsData from '@/static/mock/meds.json'
+import { useAuthGuard } from '@/composables/useAuthGuard'
+
+useAuthGuard()
 
 // 数据
 const allMedications = ref(medsData.medications)
@@ -305,7 +308,7 @@ const filteredMedications = computed(() => {
   return allMedications.value.filter(med => 
     med.name.toLowerCase().includes(keyword) ||
     med.atc_code.toLowerCase().includes(keyword) ||
-    med.notes.toLowerCase().includes(keyword)
+    (med.notes && med.notes.toLowerCase().includes(keyword))
   )
 })
 
@@ -383,7 +386,7 @@ const addToPrescription = (med) => {
 const checkInteraction = (newMed) => {
   for (const prescribedMed of currentPrescription.value) {
     // 检查新药是否与已有药品冲突
-    if (newMed.interactions.includes(prescribedMed.id)) {
+    if (newMed.interactions && newMed.interactions.includes(prescribedMed.id)) {
       return {
         existingMed: prescribedMed,
         severity: calculateSeverity(newMed, prescribedMed)
@@ -391,7 +394,7 @@ const checkInteraction = (newMed) => {
     }
     
     // 检查已有药品是否与新药冲突
-    if (prescribedMed.interactions.includes(newMed.id)) {
+    if (prescribedMed.interactions && prescribedMed.interactions.includes(newMed.id)) {
       return {
         existingMed: prescribedMed,
         severity: calculateSeverity(newMed, prescribedMed)
@@ -471,8 +474,8 @@ const findAlternativeMeds = (med) => {
     
     // 检查是否与处方中的药品有冲突
     for (const prescribedMed of currentPrescription.value) {
-      if (altMed.interactions.includes(prescribedMed.id) || 
-          prescribedMed.interactions.includes(altMed.id)) {
+      if ((altMed.interactions && altMed.interactions.includes(prescribedMed.id)) || 
+          (prescribedMed.interactions && prescribedMed.interactions.includes(altMed.id))) {
         return false
       }
     }

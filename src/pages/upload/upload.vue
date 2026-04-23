@@ -86,6 +86,9 @@
 import { ref, computed } from 'vue'
 import AppHeader from '@/components/AppHeader.vue'
 import MediaUploader from '@/components/MediaUploader.vue'
+import { useAuthGuard } from '@/composables/useAuthGuard'
+
+useAuthGuard()
 
 const types = ref(['皮肤检查', 'X光检查', '血液检查', '心电图', '其他检查'])
 const typeIndex = ref(0)
@@ -123,8 +126,9 @@ const mockAIAnalysis = () => {
 
   return {
     tags: tags,
-    model_version: `ai-medical-v${(Math.random() * 3 + 1).toFixed(1)}`,
+    model_version: 'HealthCare-Demo-v1.0',
     confidence: Math.random() * 0.3 + 0.7, // 0.7-1.0
+    confidence_label: '(演示分析结果)',
     notes: `AI自动分析结果：${selectedType}图像已处理，检测到${tags.length}个关键特征。建议结合临床症状进行综合判断。`
   }
 }

@@ -3,6 +3,12 @@
     <AppHeader title="病历管理" />
 
     <view class="content">
+      <!-- 加载状态 -->
+      <view v-if="loading" class="loading-state">
+        <text class="loading-text">加载中...</text>
+      </view>
+
+      <template v-else>
       <!-- 顶部统计卡片 -->
       <view class="stats-container">
         <view class="stat-card">
@@ -129,6 +135,7 @@
           <text>立即上传</text>
         </view>
       </view>
+      </template>
     </view>
 
     <BottomNav />
@@ -140,8 +147,12 @@ import { ref, computed, onMounted } from 'vue'
 import AppHeader from '@/components/AppHeader.vue'
 import BottomNav from '@/components/BottomNav.vue'
 import recordsData from '@/static/mock/records.json'
+import { useAuthGuard } from '@/composables/useAuthGuard'
+
+useAuthGuard()
 
 const records = ref([])
+const loading = ref(true)
 const currentTab = ref(0)
 const currentSort = ref(0)
 const sortAsc = ref(false)
@@ -222,6 +233,7 @@ const loadRecords = () => {
   }
 
   records.value = [...customRecords, ...recordsData.records]
+  loading.value = false
 }
 
 // 切换选项卡
@@ -281,6 +293,18 @@ const goToUpload = () => {
   min-height: 100vh;
   background: linear-gradient(180deg, #F0F4F8 0%, #FAFBFC 100%);
   padding-bottom: 120rpx;
+}
+
+.loading-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+}
+
+.loading-text {
+  font-size: 32rpx;
+  color: #999;
 }
 
 .content {

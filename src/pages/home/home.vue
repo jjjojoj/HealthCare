@@ -1,10 +1,10 @@
 <template>
-  <view class="page">
+  <view class="home-page">
     <AppHeader title="健康中心" />
 
-    <view class="content">
+    <view class="home-container">
       <!-- 用户信息卡片 - 增强版 -->
-      <view class="user-card">
+      <view class="user-info-card">
         <view class="card-background">
           <view class="bg-circle bg-circle-1"></view>
           <view class="bg-circle bg-circle-2"></view>
@@ -40,65 +40,60 @@
 
       <!-- 快捷功能区域 - 增强版 -->
       <view class="quick-actions-section">
-        <view class="section-title">
-          <text class="title-text">快捷服务</text>
-          <text class="title-subtitle">一键直达常用功能</text>
-        </view>
+        <view class="section-title">快捷服务</view>
+        <view class="section-subtitle">一键直达常用功能</view>
         
         <view class="quick-actions">
           <view class="action-card upload-card" @click="navigateTo('/pages/upload/upload')">
-            <view class="action-icon-bg upload">
-              <view class="icon-wrapper">
-                <text class="action-icon">📤</text>
-                <view class="icon-glow"></view>
+            <view class="action-left">
+              <view class="action-icon">
+                <text class="icon-text">📤</text>
+              </view>
+              <view class="action-content">
+                <view class="action-title">上传检查</view>
+                <view class="action-desc">AI智能分析</view>
               </view>
             </view>
-            <view class="action-text">
-              <view class="action-title">上传检查</view>
-              <view class="action-subtitle">AI智能分析</view>
-            </view>
-            <view class="action-arrow">
-              <text class="arrow-icon">→</text>
+            <view class="action-right">
+              <view class="action-arrow">→</view>
             </view>
           </view>
 
-          <view class="action-card meds-card" @click="navigateTo('/pages/meds/meds')">
-            <view class="action-icon-bg meds">
-              <view class="icon-wrapper">
-                <text class="action-icon">💊</text>
-                <view class="icon-glow"></view>
+          <view class="action-card medication-card" @click="navigateTo('/pages/meds/meds')">
+            <view class="action-left">
+              <view class="action-icon">
+                <text class="icon-text">💊</text>
+              </view>
+              <view class="action-content">
+                <view class="action-title">用药助手</view>
+                <view class="action-desc">智能提醒</view>
               </view>
             </view>
-            <view class="action-text">
-              <view class="action-title">用药助手</view>
-              <view class="action-subtitle">智能提醒</view>
-            </view>
-            <view class="action-arrow">
-              <text class="arrow-icon">→</text>
+            <view class="action-right">
+              <view class="action-arrow">→</view>
             </view>
           </view>
 
           <view class="action-card analysis-card" @click="navigateTo('/pages/trends/trends')">
-            <view class="action-icon-bg analysis">
-              <view class="icon-wrapper">
-                <text class="action-icon">📊</text>
-                <view class="icon-glow"></view>
+            <view class="action-left">
+              <view class="action-icon">
+                <text class="icon-text">📊</text>
+              </view>
+              <view class="action-content">
+                <view class="action-title">健康分析</view>
+                <view class="action-desc">数据洞察</view>
               </view>
             </view>
-            <view class="action-text">
-              <view class="action-title">健康分析</view>
-              <view class="action-subtitle">数据洞察</view>
-            </view>
-            <view class="action-arrow">
-              <text class="arrow-icon">→</text>
+            <view class="action-right">
+              <view class="action-arrow">→</view>
             </view>
           </view>
         </view>
       </view>
 
       <!-- 健康数据仪表盘（全宽） -->
-      <view class="dashboard-section">
-        <view class="section-header">
+      <view class="health-dashboard-section">
+        <view class="dashboard-header">
           <view class="header-title">健康仪表盘</view>
           <view class="header-subtitle">实时监测您的健康状态</view>
         </view>
@@ -114,13 +109,15 @@
 </template>
 
 <script setup>
-import { computed, onMounted } from 'vue'
+import { computed } from 'vue'
 import AppHeader from '@/components/AppHeader.vue'
 import BottomNav from '@/components/BottomNav.vue'
 import HealthDashboard from '@/components/HealthDashboard.vue'
 import { useAuth } from '@/composables/useAuth'
+import { useAuthGuard } from '@/composables/useAuthGuard'
 
-const { checkAuth, userName } = useAuth()
+useAuthGuard()
+const { userName } = useAuth()
 
 // 计算问候语
 const greeting = computed(() => {
@@ -132,14 +129,6 @@ const greeting = computed(() => {
   if (hour < 18) return '下午好'
   if (hour < 22) return '晚上好'
   return '夜深了'
-})
-
-onMounted(() => {
-  // 检查登录状态
-  const isAuthenticated = checkAuth()
-  if (!isAuthenticated) {
-    uni.reLaunch({ url: '/pages/login/login' })
-  }
 })
 
 const navigateTo = (url) => {

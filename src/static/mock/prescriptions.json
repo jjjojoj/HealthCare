@@ -83,6 +83,60 @@
       "follow_up": "3天后电话随访",
       "created_at": "2025-09-15T14:20:00Z",
       "status": "completed"
+    },
+    {
+      "id": 3,
+      "prescription_number": "RX-2025081000789",
+      "patient_id": 1,
+      "doctor_name": "张医生",
+      "doctor_title": "主任医师",
+      "doctor_department": "消化内科",
+      "doctor_signature": "张医生",
+      "hospital_name": "市人民医院",
+      "date": "2025-08-10",
+      "diagnosis": "肝功能异常",
+      "medications": [
+        {
+          "id": 6,
+          "name": "奥美拉唑肠溶胶囊",
+          "specification": "20mg/粒",
+          "quantity": 28,
+          "unit": "粒",
+          "dosage": "每次1粒",
+          "frequency": "每日1次",
+          "duration": "28天",
+          "usage": "口服，空腹服用",
+          "notes": "质子泵抑制剂，保护胃黏膜，减少药物对胃的刺激"
+        },
+        {
+          "id": 9,
+          "name": "水飞蓟宾胶囊",
+          "specification": "35mg/粒",
+          "quantity": 42,
+          "unit": "粒",
+          "dosage": "每次2粒",
+          "frequency": "每日3次",
+          "duration": "14天",
+          "usage": "口服，饭后服用",
+          "notes": "保肝药物，改善肝功能，促进肝细胞修复"
+        },
+        {
+          "id": 10,
+          "name": "多烯磷脂酰胆碱胶囊",
+          "specification": "228mg/粒",
+          "quantity": 42,
+          "unit": "粒",
+          "dosage": "每次2粒",
+          "frequency": "每日3次",
+          "duration": "14天",
+          "usage": "口服，饭后服用",
+          "notes": "促进肝细胞膜修复，改善肝脏代谢功能"
+        }
+      ],
+      "instructions": "严格戒酒，清淡饮食，避免服用对肝脏有损害的药物。注意休息，保证充足睡眠。两周后复查肝功能。",
+      "follow_up": "两周后复查肝功能",
+      "created_at": "2025-08-10T09:15:00Z",
+      "status": "active"
     }
   ]
 }

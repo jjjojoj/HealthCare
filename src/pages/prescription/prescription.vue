@@ -101,8 +101,8 @@
       <!-- 操作按钮 -->
       <view class="actions">
         <button class="btn-secondary" @click="goBack">返回</button>
-        <button class="btn-primary" @click="exportToPDF" :disabled="exporting">
-          {{ exporting ? '导出中...' : '导出PDF' }}
+        <button class="btn-primary" @click="copyToClipboard">
+          复制处方
         </button>
       </view>
     </view>
@@ -111,15 +111,16 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import jsPDF from 'jspdf'
 import AppHeader from '@/components/AppHeader.vue'
+import { useAuthGuard } from '@/composables/useAuthGuard'
+import prescriptionsData from '@/static/mock/prescriptions.json'
+
+useAuthGuard()
 
 // 响应式数据
 const loading = ref(true)
 const error = ref('')
 const prescription = ref(null)
-const patient = ref(null)
-const exporting = ref(false)
 
 // 获取URL参数
 const getPrescriptionId = () => {
@@ -129,45 +130,23 @@ const getPrescriptionId = () => {
 }
 
 // 加载处方数据
-const loadPrescriptionData = async () => {
+const loadPrescriptionData = () => {
   try {
     loading.value = true
     error.value = ''
-    
+
     const prescriptionId = getPrescriptionId()
-    
-    // 加载处方数据
-    const prescriptionResponse = await uni.request({
-      url: '/static/mock/prescriptions.json',
-      method: 'GET'
-    })
-    
-    if (prescriptionResponse.statusCode !== 200) {
-      throw new Error('无法加载处方数据')
-    }
-    
-    const prescriptionData = prescriptionResponse.data.prescriptions.find(
+
+    const prescriptionData = prescriptionsData.prescriptions.find(
       p => p.id.toString() === prescriptionId
     )
-    
+
     if (!prescriptionData) {
       throw new Error('未找到指定的处方')
     }
-    
+
     prescription.value = prescriptionData
-    
-    // 加载患者数据
-    const userResponse = await uni.request({
-      url: '/static/mock/users.json',
-      method: 'GET'
-    })
-    
-    if (userResponse.statusCode === 200) {
-      patient.value = userResponse.data.users.find(
-        u => u.id === prescriptionData.patient_id
-      )
-    }
-    
+
   } catch (err) {
     console.error('加载处方数据失败:', err)
     error.value = err.message || '加载失败，请重试'
@@ -176,113 +155,57 @@ const loadPrescriptionData = async () => {
   }
 }
 
-// 导出PDF
-const exportToPDF = async () => {
-  if (!prescription.value || !patient.value) return
+// 复制处方信息到剪贴板
+const copyToClipboard = () => {
+  if (!prescription.value) return
   
   try {
-    exporting.value = true
-    
-    // 创建PDF文档
-    const doc = new jsPDF()
-    
-    // 设置中文字体（这里使用默认字体，实际项目中可能需要加载中文字体）
-    doc.setFont('helvetica')
-    
-    let yPosition = 20
-    
-    // 标题
-    doc.setFontSize(20)
-    doc.text('电子处方', 105, yPosition, { align: 'center' })
-    yPosition += 15
-    
-    // 医院名称
-    doc.setFontSize(16)
-    doc.text(prescription.value.hospital_name, 105, yPosition, { align: 'center' })
-    yPosition += 20
-    
-    // 处方信息
-    doc.setFontSize(12)
-    doc.text(`处方编号: ${prescription.value.prescription_number}`, 20, yPosition)
-    yPosition += 8
-    doc.text(`患者姓名: ${patient.value.name}`, 20, yPosition)
-    yPosition += 8
-    doc.text(`开方医生: ${prescription.value.doctor_name} ${prescription.value.doctor_title}`, 20, yPosition)
-    yPosition += 8
-    doc.text(`科室: ${prescription.value.doctor_department}`, 20, yPosition)
-    yPosition += 8
-    doc.text(`开方日期: ${prescription.value.date}`, 20, yPosition)
-    yPosition += 8
-    doc.text(`诊断: ${prescription.value.diagnosis}`, 20, yPosition)
-    yPosition += 15
-    
-    // 药品清单标题
-    doc.setFontSize(14)
-    doc.text('药品清单:', 20, yPosition)
-    yPosition += 10
-    
-    // 药品列表
-    doc.setFontSize(10)
-    prescription.value.medications.forEach((med, index) => {
-      doc.text(`${index + 1}. ${med.name} ${med.specification}`, 25, yPosition)
-      yPosition += 6
-      doc.text(`   用法用量: ${med.dosage}, ${med.frequency}`, 25, yPosition)
-      yPosition += 6
-      doc.text(`   数量: ${med.quantity}${med.unit}, 疗程: ${med.duration}`, 25, yPosition)
-      yPosition += 6
-      doc.text(`   服用方法: ${med.usage}`, 25, yPosition)
+    const p = prescription.value
+    let text = `【电子处方】\n`
+    text += `医院：${p.hospital_name}\n`
+    text += `处方编号：${p.prescription_number}\n`
+    text += `开方医生：${p.doctor_name} ${p.doctor_title}\n`
+    text += `科室：${p.doctor_department}\n`
+    text += `开方日期：${p.date}\n`
+    text += `诊断：${p.diagnosis}\n\n`
+    text += `【药品清单】\n`
+    p.medications.forEach((med, index) => {
+      text += `${index + 1}. ${med.name} ${med.specification}\n`
+      text += `   用法用量：${med.dosage}，${med.frequency}\n`
+      text += `   数量：${med.quantity}${med.unit}，疗程：${med.duration}\n`
+      text += `   服用方法：${med.usage}\n`
       if (med.notes) {
-        yPosition += 6
-        doc.text(`   备注: ${med.notes}`, 25, yPosition)
+        text += `   备注：${med.notes}\n`
       }
-      yPosition += 10
     })
-    
-    // 医嘱
-    yPosition += 5
-    doc.setFontSize(12)
-    doc.text('医嘱:', 20, yPosition)
-    yPosition += 8
-    doc.setFontSize(10)
-    
-    // 处理长文本换行
-    const instructionsLines = doc.splitTextToSize(prescription.value.instructions, 170)
-    instructionsLines.forEach(line => {
-      doc.text(line, 25, yPosition)
-      yPosition += 6
-    })
-    
-    if (prescription.value.follow_up) {
-      yPosition += 5
-      doc.text(`复诊安排: ${prescription.value.follow_up}`, 25, yPosition)
-      yPosition += 10
+    text += `\n【医嘱】\n${p.instructions}\n`
+    if (p.follow_up) {
+      text += `\n复诊安排：${p.follow_up}\n`
     }
+    text += `\n医生签名：${p.doctor_signature}\n`
+    text += `日期：${p.date}\n`
     
-    // 医生签名
-    yPosition += 10
-    doc.text(`医生签名: ${prescription.value.doctor_signature}`, 120, yPosition)
-    yPosition += 8
-    doc.text(`日期: ${prescription.value.date}`, 120, yPosition)
-    
-    // 生成文件名
-    const fileName = `处方_${patient.value.name}_${prescription.value.date}.pdf`
-    
-    // 保存PDF
-    doc.save(fileName)
-    
-    uni.showToast({
-      title: 'PDF导出成功',
-      icon: 'success'
+    uni.setClipboardData({
+      data: text,
+      success: () => {
+        uni.showToast({
+          title: '处方已复制到剪贴板',
+          icon: 'success'
+        })
+      },
+      fail: () => {
+        uni.showToast({
+          title: '复制失败，请重试',
+          icon: 'error'
+        })
+      }
     })
-    
   } catch (err) {
-    console.error('PDF导出失败:', err)
+    console.error('复制处方失败:', err)
     uni.showToast({
-      title: 'PDF导出失败',
+      title: '复制失败',
       icon: 'error'
     })
-  } finally {
-    exporting.value = false
   }
 }
 

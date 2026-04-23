@@ -2,6 +2,11 @@
   <view class="emergency-container">
     <AppHeader title="紧急联系人" :show-back="true" />
     
+    <!-- 演示模式横幅 -->
+    <view class="demo-banner">
+      <text class="demo-banner-text">⚠️ 演示模式：紧急通知功能仅为演示，不会发送真实消息。如遇紧急情况请拨打 120 急救电话。</text>
+    </view>
+
     <!-- 页面标题 -->
     <view class="page-header">
       <text class="header-subtitle">紧急情况下快速联系您的家人朋友</text>
@@ -147,6 +152,10 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import AppHeader from '@/components/AppHeader.vue'
+import { useAuthGuard } from '@/composables/useAuthGuard'
+import { validatePhone } from '@/utils/validator'
+
+useAuthGuard()
 
 // 紧急联系人信息
 const emergencyContact = ref({
@@ -236,9 +245,8 @@ const saveContact = () => {
     return
   }
   
-  // 验证手机号格式（简单验证）
-  const phoneRegex = /^1[3-9]\d{9}$/
-  if (!phoneRegex.test(editForm.value.phone)) {
+  // 验证手机号格式
+  if (!validatePhone(editForm.value.phone)) {
     uni.showToast({
       title: '请输入正确的手机号',
       icon: 'none'
@@ -298,11 +306,13 @@ const sendNotification = () => {
   // 关闭确认弹窗
   closeConfirmModal()
   
-  // 显示成功提示
-  uni.showToast({
-    title: '通知已发送',
-    icon: 'success',
-    duration: 2000
+  // 显示演示模式提醒
+  uni.showModal({
+    title: '⚠️ 演示模式提醒',
+    content: '这是演示模式，通知未实际发送。如遇紧急情况请拨打 120。',
+    showCancel: false,
+    confirmText: '我知道了',
+    confirmColor: '#f5576c'
   })
   
   // 模拟发送通知（在控制台输出）
@@ -333,6 +343,29 @@ const clearHistory = () => {
   min-height: 100vh;
   background: linear-gradient(135deg, #37CD87 0%, #2DB873 100%);
   padding: 40rpx;
+}
+
+/* 演示模式横幅 */
+.demo-banner {
+  background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+  padding: 24rpx 32rpx;
+  border-radius: 16rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 8rpx 24rpx rgba(231, 76, 60, 0.4);
+  animation: bannerPulse 3s ease-in-out infinite;
+}
+
+@keyframes bannerPulse {
+  0%, 100% { box-shadow: 0 8rpx 24rpx rgba(231, 76, 60, 0.4); }
+  50% { box-shadow: 0 8rpx 32rpx rgba(231, 76, 60, 0.6); }
+}
+
+.demo-banner-text {
+  font-size: 28rpx;
+  color: #ffffff;
+  text-align: center;
+  line-height: 1.6;
+  font-weight: 600;
 }
 
 /* 页面标题 */

@@ -161,6 +161,9 @@ import AppHeader from '@/components/AppHeader.vue'
 import BottomNav from '@/components/BottomNav.vue'
 import * as echarts from 'echarts'
 import metricsData from '@/static/mock/metrics.json'
+import { useAuthGuard } from '@/composables/useAuthGuard'
+
+useAuthGuard()
 
 // 时间范围选项
 const timeRanges = ref([

@@ -13,7 +13,7 @@ export default {
   apiTimeout: parseInt(env.VITE_API_TIMEOUT) || 30000,
   
   // 是否使用 Mock 数据
-  useMock: env.VITE_USE_MOCK === 'true',
+  useMock: env.VITE_USE_MOCK !== 'false',
   
   // 微信小程序 AppID
   weixinAppId: env.VITE_WEIXIN_APPID || '',

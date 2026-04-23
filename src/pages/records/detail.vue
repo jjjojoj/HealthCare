@@ -2,7 +2,12 @@
   <view class="page">
     <AppHeader title="病历详情" :show-back="true" />
 
-    <scroll-view scroll-y class="content" v-if="record">
+    <!-- 加载状态 -->
+    <view v-if="loading" class="loading-state">
+      <text class="loading-text">加载中...</text>
+    </view>
+
+    <scroll-view scroll-y class="content" v-else-if="record">
       <!-- 图片查看器 -->
       <view class="image-gallery" v-if="record.images && record.images.length > 0">
         <swiper
@@ -282,8 +287,12 @@
 import { ref, computed, onMounted } from 'vue'
 import AppHeader from '@/components/AppHeader.vue'
 import recordsData from '@/static/mock/records.json'
+import { useAuthGuard } from '@/composables/useAuthGuard'
+
+useAuthGuard()
 
 const record = ref(null)
+const loading = ref(true)
 const currentImageIndex = ref(0)
 const showJSONModal = ref(false)
 
@@ -322,6 +331,7 @@ onMounted(() => {
       record.value = recordsData.records.find(r => r.id === id)
     }
   }
+  loading.value = false
 })
 
 // 获取检查类型
@@ -493,6 +503,18 @@ const deleteRecord = () => {
 .page {
   min-height: 100vh;
   background: #f5f5f5;
+}
+
+.loading-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+}
+
+.loading-text {
+  font-size: 32rpx;
+  color: #999;
 }
 
 .content {

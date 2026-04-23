@@ -1,9 +1,14 @@
 <template>
-  <view class="container">
-    <!-- 页面头部 -->
-    <AppHeader title="视频会诊" :show-back="true" />
-    
-    <!-- 主要内容 -->
+    <view class="container">
+      <!-- 页面头部 -->
+      <AppHeader title="视频会诊" :show-back="true" />
+      
+      <!-- 演示模式横幅 -->
+      <view class="demo-banner">
+        <text class="demo-banner-text">⚠️ 演示模式：视频会诊功能仅为演示，不支持真实音视频通话。</text>
+      </view>
+
+      <!-- 主要内容 -->
     <view class="content">
       <!-- WebRTC 技术说明卡片 -->
       <view class="info-card">
@@ -41,7 +46,6 @@
           <button 
             class="action-btn primary-btn" 
             @click="handleCreateRoom"
-            :disabled="!canCreateRoom"
           >
             <text class="btn-icon">📹</text>
             <text>发起会诊</text>
@@ -56,16 +60,17 @@
           </button>
         </view>
 
-        <!-- 权限提示 -->
-        <view class="permission-notice" v-if="!canCreateRoom">
-          <text class="notice-icon">⚠️</text>
-          <text class="notice-text">您没有权限发起会诊，只有医生可以发起会诊</text>
+        <!-- 演示提示 -->
+        <view class="permission-notice demo-notice">
+          <text class="notice-icon">💡</text>
+          <text class="notice-text">演示模式下所有用户均可体验发起会诊功能，不会产生真实通话</text>
         </view>
 
         <!-- 房间信息展示 -->
         <view class="room-info" v-if="roomInfo.id">
           <view class="room-header">
             <text class="room-title">会诊房间已创建</text>
+            <text class="room-demo-badge">演示</text>
             <text class="room-status">● 等待中</text>
           </view>
           
@@ -151,6 +156,9 @@
 import { ref, computed, onMounted } from 'vue'
 import AppHeader from '@/components/AppHeader.vue'
 import BottomNav from '@/components/BottomNav.vue'
+import { useAuthGuard } from '@/composables/useAuthGuard'
+
+useAuthGuard()
 
 // 响应式数据
 const currentUser = ref(null)
@@ -217,16 +225,7 @@ const getStatusText = (status) => {
 
 // 发起会诊
 const handleCreateRoom = () => {
-  if (!canCreateRoom.value) {
-    uni.showToast({
-      title: '您没有权限发起会诊',
-      icon: 'none',
-      duration: 2000
-    })
-    return
-  }
-
-  // 生成房间信息
+  // 生成房间信息（演示模式，所有用户都可以创建）
   const roomId = generateRoomId()
   const createTime = formatTime(new Date())
   const link = `https://healthcare.example.com/video/join?room=${roomId}`
@@ -234,21 +233,24 @@ const handleCreateRoom = () => {
   roomInfo.value = {
     id: roomId,
     createTime: createTime,
-    link: link
+    link: link,
+    isDemo: true
   }
-
-  uni.showToast({
-    title: '会诊房间创建成功',
-    icon: 'success',
-    duration: 2000
-  })
 
   // 模拟添加到历史记录
   consultationHistory.value.unshift({
     id: Date.now(),
-    title: `新建会诊 - ${currentUser.value.name}`,
+    title: `新建会诊 - ${currentUser.value ? currentUser.value.name : '演示用户'}`,
     time: createTime,
     status: 'waiting'
+  })
+
+  uni.showModal({
+    title: '🎬 演示会诊已创建',
+    content: `演示会诊已创建，实际功能开发中。\n\n房间ID：${roomId}\n\n此为演示模拟，不会建立真实音视频连接。`,
+    showCancel: false,
+    confirmText: '我知道了',
+    confirmColor: '#37CD87'
   })
 }
 
@@ -350,6 +352,22 @@ onMounted(() => {
 .container {
   min-height: 100vh;
   background: linear-gradient(135deg, #37CD87 0%, #2DB873 100%);
+}
+
+.demo-banner {
+  background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+  padding: 20rpx 32rpx;
+  margin: 20rpx;
+  border-radius: 16rpx;
+  box-shadow: 0 8rpx 24rpx rgba(243, 156, 18, 0.4);
+}
+
+.demo-banner-text {
+  font-size: 26rpx;
+  color: #ffffff;
+  text-align: center;
+  line-height: 1.6;
+  font-weight: 600;
 }
 
 .content {
@@ -532,6 +550,15 @@ onMounted(() => {
   color: #856404;
 }
 
+.demo-notice {
+  background: #e8f8f0;
+  border-color: #b7ebde;
+}
+
+.demo-notice .notice-text {
+  color: #389e0d;
+}
+
 /* 房间信息样式 */
 .room-info {
   background: #f0f8ff;
@@ -556,6 +583,15 @@ onMounted(() => {
 .room-status {
   font-size: 24rpx;
   color: #4CAF50;
+}
+
+.room-demo-badge {
+  font-size: 22rpx;
+  color: #ffffff;
+  background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+  padding: 4rpx 16rpx;
+  border-radius: 20rpx;
+  font-weight: 600;
 }
 
 .room-details {

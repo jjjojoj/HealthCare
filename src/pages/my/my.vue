@@ -50,20 +50,12 @@
 import { ref, onMounted } from 'vue'
 import AppHeader from '@/components/AppHeader.vue'
 import BottomNav from '@/components/BottomNav.vue'
+import { useAuthGuard } from '@/composables/useAuthGuard'
+import { useAuth } from '@/composables/useAuth'
 
-const userInfo = ref({})
+useAuthGuard()
 
-onMounted(() => {
-  // 获取用户信息
-  try {
-    const info = uni.getStorageSync('userInfo')
-    if (info) {
-      userInfo.value = info
-    }
-  } catch (e) {
-    console.error('获取用户信息失败', e)
-  }
-})
+const { userInfo, logout: authLogout } = useAuth()
 
 const navigateTo = (url) => {
   uni.navigateTo({ url })
@@ -75,14 +67,9 @@ const logout = () => {
     content: '确定要退出登录吗？',
     success: (res) => {
       if (res.confirm) {
-        // 清除本地存储
-        uni.removeStorageSync('userInfo')
-        uni.removeStorageSync('isLogin')
-
         uni.showToast({ title: '已退出登录', icon: 'success' })
-
         setTimeout(() => {
-          uni.reLaunch({ url: '/pages/login/login' })
+          authLogout()
         }, 1000)
       }
     }

@@ -1,7 +1,7 @@
 {
-  "name": "healthcare-uniapp",
+  "name": "healthcare-management",
   "version": "1.0.0",
-  "description": "远程医疗/病历管理演示项目",
+  "description": "远程医疗管理系统 - 基于 uni-app + Vue3 的智能健康管理演示平台",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
